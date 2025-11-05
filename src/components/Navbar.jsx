@@ -1,24 +1,38 @@
 import { Link, useLocation } from 'react-router-dom'
+import { useTheme } from '../context/ThemeContext'
+import ThemeToggle from './ThemeToggle'
 
 const Navbar = () => {
   const location = useLocation()
+  const { theme } = useTheme()
 
   const isActive = (path) => location.pathname === path
+  const isLight = theme === 'light'
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
+    <nav className={`shadow-lg sticky top-0 z-50 border-b transition-colors duration-300 ${
+      isLight 
+        ? 'bg-custom-3 shadow-gray-600/60 border-gray-500 backdrop-blur-sm' 
+        : 'bg-custom-1 shadow-black/50 border-custom-2'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link to="/" className="text-2xl font-bold text-gray-800 hover:text-blue-600 transition">
+          <Link to="/" className={`text-2xl font-bold hover:text-custom-5 transition font-['Space_Grotesk'] ${
+            isLight ? 'text-custom-5' : 'text-white'
+          }`}>
             Brian
           </Link>
-          <div className="flex space-x-4">
+          <div className="flex items-center space-x-4">
+            <ThemeToggle />
+            <div className="flex space-x-4">
             <Link
               to="/"
               className={`px-3 py-2 rounded-md text-sm font-medium transition ${
                 isActive('/')
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
+                  ? 'bg-custom-5 text-white'
+                  : isLight 
+                    ? 'text-gray-900 hover:bg-gray-600 hover:text-white font-semibold' 
+                    : 'text-gray-300 hover:bg-custom-2 hover:text-white'
               }`}
             >
               Inicio
@@ -27,8 +41,10 @@ const Navbar = () => {
               to="/projects"
               className={`px-3 py-2 rounded-md text-sm font-medium transition ${
                 isActive('/projects')
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
+                  ? 'bg-custom-5 text-white'
+                  : isLight 
+                    ? 'text-gray-900 hover:bg-gray-600 hover:text-white font-semibold' 
+                    : 'text-gray-300 hover:bg-custom-2 hover:text-white'
               }`}
             >
               Proyectos
@@ -37,8 +53,10 @@ const Navbar = () => {
               to="/about"
               className={`px-3 py-2 rounded-md text-sm font-medium transition ${
                 isActive('/about')
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
+                  ? 'bg-custom-5 text-white'
+                  : isLight 
+                    ? 'text-gray-900 hover:bg-gray-600 hover:text-white font-semibold' 
+                    : 'text-gray-300 hover:bg-custom-2 hover:text-white'
               }`}
             >
               Sobre Mí
@@ -47,12 +65,15 @@ const Navbar = () => {
               to="/contact"
               className={`px-3 py-2 rounded-md text-sm font-medium transition ${
                 isActive('/contact')
-                  ? 'bg-blue-600 text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
+                  ? 'bg-custom-5 text-white'
+                  : isLight 
+                    ? 'text-gray-900 hover:bg-gray-600 hover:text-white font-semibold' 
+                    : 'text-gray-300 hover:bg-custom-2 hover:text-white'
               }`}
             >
               Contacto
             </Link>
+            </div>
           </div>
         </div>
       </div>
