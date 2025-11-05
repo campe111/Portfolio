@@ -5,12 +5,45 @@
 /* postcss-ignore */
 @tailwind utilities;
 
+/* CSS Variables - Dark Mode */
+:root {
+  --color-1: #1c1c1c;
+  --color-2: #3b3b3b;
+  --color-3: #5c5c5c;
+  --color-4: #9b3b3b;
+  --color-5: #d84f4f;
+  --text-primary: #ffffff;
+  --text-secondary: #e5e5e5;
+  --text-tertiary: #b3b3b3;
+}
+
+/* CSS Variables - Light Mode (oscurecido) */
+:root.light {
+  --color-1: #bcbcbc;       /* Fondo base más neutro y menos brillante */
+  --color-2: #888888;       /* Fondo intermedio con contraste */
+  --color-3: #666666;       /* Fondo profundo para secciones destacadas */
+  --color-4: #a33a3a;       /* Rojo oscuro para acentos */
+  --color-5: #e04f4f;       /* Rojo vibrante para botones y CTA */
+  --text-primary: #1a1a1a;  /* Texto principal oscuro */
+  --text-secondary: #2e2e2e;/* Texto secundario más legible */
+  --text-tertiary: #4a4a4a; /* Texto terciario con buen contraste */
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Inter', 'Space Grotesk', 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-1);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 
