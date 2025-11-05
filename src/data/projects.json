@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "title": "Proyecto Ejemplo 1",
+    "description": "Una aplicación web moderna desarrollada con React y Node.js que permite gestionar tareas de manera eficiente.",
+    "technologies": ["React", "Node.js", "MongoDB"],
+    "image": "/images/project1.jpg",
+    "github": "https://github.com/brian/proyecto1",
+    "demo": "https://proyecto1-demo.vercel.app"
+  },
+  {
+    "id": 2,
+    "title": "Proyecto Ejemplo 2",
+    "description": "Sistema de e-commerce con carrito de compras, integración de pagos y panel de administración.",
+    "technologies": ["React", "Express", "PostgreSQL"],
+    "image": "/images/project2.jpg",
+    "github": "https://github.com/brian/proyecto2",
+    "demo": "https://proyecto2-demo.vercel.app"
+  },
+  {
+    "id": 3,
+    "title": "Proyecto Ejemplo 3",
+    "description": "Plataforma de aprendizaje en línea con videos, quizzes y certificados.",
+    "technologies": ["React", "Firebase", "Tailwind CSS"],
+    "image": "/images/project3.jpg",
+    "github": "https://github.com/brian/proyecto3",
+    "demo": "https://proyecto3-demo.vercel.app"
+  }
+]
+
