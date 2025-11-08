@@ -1,18 +1,30 @@
+// Importaciones de React hooks para manejar estado
 import { useState } from 'react'
+// Importación del hook para acceder al contexto de tema
 import { useTheme } from '../context/ThemeContext'
+// Importación del componente de sección animada
 import AnimatedSection from '../components/AnimatedSection'
 
+/**
+ * Componente Contact - Página de contacto
+ * Muestra un formulario de contacto y enlaces a redes sociales
+ */
 const Contact = () => {
+  // Obtiene el tema actual del contexto
   const { theme } = useTheme()
+  // Variable booleana que indica si el tema actual es claro
   const isLight = theme === 'light'
+  // Estado para almacenar los datos del formulario
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   })
 
+  // Estado para indicar si el formulario fue enviado exitosamente
   const [submitted, setSubmitted] = useState(false)
 
+  // Función que maneja los cambios en los campos del formulario
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -20,11 +32,14 @@ const Contact = () => {
     })
   }
 
+  // Función que maneja el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Aquí puedes agregar la lógica para enviar el formulario
+    // TODO: Aquí puedes agregar la lógica para enviar el formulario a un backend
     console.log('Formulario enviado:', formData)
+    // Muestra mensaje de éxito
     setSubmitted(true)
+    // Después de 3 segundos, oculta el mensaje y limpia el formulario
     setTimeout(() => {
       setSubmitted(false)
       setFormData({ name: '', email: '', message: '' })
@@ -64,15 +79,19 @@ const Contact = () => {
           <div className={`bg-custom-2 rounded-lg shadow-lg p-8 md:p-12 border transition-colors duration-300 ${
             isLight ? 'bg-custom-2 shadow-gray-400 border-gray-400' : 'shadow-black/50 border-custom-3/30'
           }`}>
+          {/* Grilla de dos columnas: formulario y redes sociales */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Formulario */}
+            {/* Columna del formulario de contacto */}
             <div>
+              {/* Título de la sección del formulario */}
               <h2 className={`text-2xl font-semibold mb-6 font-['Space_Grotesk'] ${
                 isLight ? 'text-custom-5' : 'text-white'
               }`}>
                 Enviame un Mensaje
               </h2>
+              {/* Formulario de contacto */}
               <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Campo de nombre */}
                 <div>
                   <label
                     htmlFor="name"
@@ -97,6 +116,7 @@ const Contact = () => {
                     placeholder="Tu nombre"
                   />
                 </div>
+                {/* Campo de email */}
                 <div>
                   <label
                     htmlFor="email"
@@ -121,6 +141,7 @@ const Contact = () => {
                     placeholder="tu@email.com"
                   />
                 </div>
+                {/* Campo de mensaje */}
                 <div>
                   <label
                     htmlFor="message"
@@ -145,6 +166,7 @@ const Contact = () => {
                     placeholder="Tu mensaje..."
                   />
                 </div>
+                {/* Botón de envío */}
                 <button
                   type="submit"
                   className={`w-full py-3 rounded-lg font-semibold hover:bg-custom-4 transition shadow-lg ${
@@ -155,6 +177,7 @@ const Contact = () => {
                 >
                   Enviar Mensaje
                 </button>
+                {/* Mensaje de éxito cuando se envía el formulario */}
                 {submitted && (
                   <div className="bg-custom-5/20 text-custom-5 p-3 rounded-lg text-center border border-custom-5/40">
                     ¡Mensaje enviado! Te contactaré pronto.
@@ -163,20 +186,24 @@ const Contact = () => {
               </form>
             </div>
 
-            {/* Redes Sociales */}
+            {/* Columna de redes sociales */}
             <div>
+              {/* Título de la sección de redes sociales */}
               <h2 className={`text-2xl font-semibold mb-6 font-['Space_Grotesk'] ${
                 isLight ? 'text-custom-5' : 'text-white'
               }`}>
                 Conectemos
               </h2>
+              {/* Contenedor de enlaces a redes sociales */}
               <div className="space-y-4">
+                {/* Enlace a GitHub */}
                 <a
                   href="https://github.com/brian"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center p-4 bg-custom-1 rounded-lg hover:bg-custom-2 transition border border-custom-3/30"
                 >
+                  {/* Ícono de GitHub */}
                   <svg
                     className="w-6 h-6 mr-4 text-custom-5"
                     fill="currentColor"
@@ -188,12 +215,14 @@ const Contact = () => {
                     isLight ? 'text-custom-5' : 'text-white'
                   }`}>GitHub</span>
                 </a>
+                {/* Enlace a LinkedIn */}
                 <a
                   href="https://linkedin.com/in/brian"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center p-4 bg-custom-1 rounded-lg hover:bg-custom-2 transition border border-custom-3/30"
                 >
+                  {/* Ícono de LinkedIn */}
                   <svg
                     className="w-6 h-6 mr-4 text-custom-5"
                     fill="currentColor"
@@ -205,10 +234,12 @@ const Contact = () => {
                     isLight ? 'text-custom-5' : 'text-white'
                   }`}>LinkedIn</span>
                 </a>
+                {/* Enlace de correo electrónico */}
                 <a
                   href="mailto:brian@example.com"
                   className="flex items-center p-4 bg-custom-1 rounded-lg hover:bg-custom-2 transition border border-custom-3/30"
                 >
+                  {/* Ícono de email */}
                   <svg
                     className="w-6 h-6 mr-4 text-custom-5"
                     fill="none"
@@ -236,5 +267,6 @@ const Contact = () => {
   )
 }
 
+// Exportación del componente Contact como exportación por defecto
 export default Contact
 
