@@ -1,25 +1,17 @@
-// Importación del hook para acceder al contexto de tema
 import { useTheme } from '../context/ThemeContext'
 
-/**
- * Componente ThemeToggle - Botón para alternar entre tema claro y oscuro
- * Muestra un ícono de sol cuando está en modo oscuro y un ícono de luna cuando está en modo claro
- */
 const ThemeToggle = () => {
-  // Obtiene el tema actual y la función para cambiar el tema
   const { theme, toggleTheme } = useTheme()
 
   return (
-    // Botón para cambiar el tema
     <button
       onClick={toggleTheme}
-      className="relative p-2 rounded-lg bg-custom-2 border border-custom-3/30 hover:bg-custom-3 transition-all"
+      className="relative flex items-center justify-center p-2 rounded-lg border border-gray-200 bg-white text-gray-900 transition-colors duration-300 hover:bg-gray-100 dark:border-custom-3/40 dark:bg-custom-2 dark:text-white dark:hover:bg-custom-3"
       aria-label="Cambiar tema"
     >
-      {/* Muestra ícono de sol si el tema es oscuro, ícono de luna si es claro */}
       {theme === 'dark' ? (
         <svg
-          className="w-5 h-5 text-white dark:text-white"
+          className="w-5 h-5 text-white"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -50,6 +42,5 @@ const ThemeToggle = () => {
   )
 }
 
-// Exportación del componente ThemeToggle como exportación por defecto
 export default ThemeToggle
 
