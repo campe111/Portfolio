@@ -1,22 +1,19 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { useTheme } from '../context/ThemeContext'
 import ProjectCard from '../components/ProjectCard'
 import AnimatedSection from '../components/AnimatedSection'
 import projectsData from '../data/projects.json'
 
 const Projects = () => {
   const [projects, setProjects] = useState([])
-  const { theme } = useTheme()
-  const isLight = theme === 'light'
 
   useEffect(() => {
     setProjects(projectsData)
   }, [])
 
   return (
-    <div 
-      className="relative overflow-hidden min-h-screen bg-white py-12 text-gray-900 transition-colors duration-300 dark:bg-custom-1 dark:text-white"
+    <div
+      className="relative overflow-hidden min-h-screen bg-custom-1 py-12 text-white"
       style={{
         backgroundImage: `url('/images/background.jpg')`,
         backgroundSize: 'cover',
@@ -24,15 +21,15 @@ const Projects = () => {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      <div 
-        className="absolute inset-0 bg-custom-1 transition-colors duration-300"
-        style={{ opacity: isLight ? 0 : 0.1 }}
+      <div
+        className="absolute inset-0 bg-custom-1"
+        style={{ opacity: 0.25 }}
       ></div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection>
           <div className="mb-12 text-center">
-            <h1 className="mb-4 text-4xl font-bold font-['Space_Grotesk'] text-gray-900 transition-colors duration-300 dark:text-white">Mis Proyectos</h1>
-            <p className="text-lg font-['Inter'] font-medium text-gray-700 transition-colors duration-300 dark:text-gray-300">
+            <h1 className="mb-4 text-4xl font-bold font-['Space_Grotesk'] text-white">Mis Proyectos</h1>
+            <p className="text-lg font-['Inter'] font-medium text-gray-300">
               Una colección de proyectos que demuestran mis habilidades y pasión por el desarrollo.
             </p>
           </div>
@@ -41,7 +38,7 @@ const Projects = () => {
         {projects.length === 0 ? (
           <AnimatedSection>
             <div className="py-12 text-center">
-              <p className="text-lg font-['Inter'] text-gray-600 transition-colors duration-300 dark:text-gray-400">
+              <p className="text-lg font-['Inter'] text-gray-400">
                 No hay proyectos disponibles en este momento.
               </p>
             </div>

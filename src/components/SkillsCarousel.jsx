@@ -1,9 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
-import { useTheme } from '../context/ThemeContext'
 import SkillCard from './SkillCard'
+
 const SkillsCarousel = ({ skills }) => {
-  const { theme } = useTheme()
-  const isLight = theme === 'light'
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
   const [startX, setStartX] = useState(0)
@@ -96,11 +94,9 @@ const SkillsCarousel = ({ skills }) => {
         <button
           onClick={handlePrev}
           disabled={currentIndex === 0}
-          className={`hidden md:flex items-center justify-center w-12 h-12 rounded-full border transition-all disabled:opacity-50 disabled:cursor-not-allowed z-10 ${
-            isLight 
-              ? 'bg-white border-gray-200 text-gray-900 hover:border-custom-5 hover:shadow-custom-5/30 shadow-md shadow-gray-200/60' 
-              : 'bg-custom-2 border-custom-3/30 text-white hover:bg-custom-3 hover:border-custom-5'
-          } ${currentIndex === 0 ? 'opacity-30' : ''}`}
+          className={`hidden md:flex items-center justify-center w-12 h-12 rounded-full border border-custom-3/30 bg-custom-2 text-white transition-all hover:bg-custom-3 hover:border-custom-5 disabled:cursor-not-allowed disabled:opacity-50 z-10 ${
+            currentIndex === 0 ? 'opacity-30' : ''
+          }`}
           aria-label="Anterior"
         >
           <svg
@@ -142,11 +138,9 @@ const SkillsCarousel = ({ skills }) => {
         <button
           onClick={handleNext}
           disabled={currentIndex >= maxIndex}
-          className={`hidden md:flex items-center justify-center w-12 h-12 rounded-full border transition-all disabled:opacity-50 disabled:cursor-not-allowed z-10 ${
-            isLight 
-              ? 'bg-white border-gray-200 text-gray-900 hover:border-custom-5 hover:shadow-custom-5/30 shadow-md shadow-gray-200/60' 
-              : 'bg-custom-2 border-custom-3/30 text-white hover:bg-custom-3 hover:border-custom-5'
-          } ${currentIndex >= maxIndex ? 'opacity-30' : ''}`}
+          className={`hidden md:flex items-center justify-center w-12 h-12 rounded-full border border-custom-3/30 bg-custom-2 text-white transition-all hover:bg-custom-3 hover:border-custom-5 disabled:cursor-not-allowed disabled:opacity-50 z-10 ${
+            currentIndex >= maxIndex ? 'opacity-30' : ''
+          }`}
           aria-label="Siguiente"
         >
           <svg
@@ -166,22 +160,16 @@ const SkillsCarousel = ({ skills }) => {
       </div>
 
       <div className="flex justify-center gap-2 mt-6">
-        {Array.from({ length: Math.min(skills.length, maxIndex + 1) }).map(
-          (_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`h-2 rounded-full transition-all ${
-                index === currentIndex
-                  ? 'bg-custom-5 w-8'
-                  : isLight 
-                    ? 'bg-gray-400 w-2 hover:bg-gray-600' 
-                    : 'bg-custom-3 w-2 hover:bg-custom-4'
-              }`}
-              aria-label={`Ir a slide ${index + 1}`}
-            />
-          )
-        )}
+        {Array.from({ length: Math.min(skills.length, maxIndex + 1) }).map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`h-2 rounded-full transition-all ${
+              index === currentIndex ? 'bg-custom-5 w-8' : 'bg-custom-3 w-2 hover:bg-custom-4'
+            }`}
+            aria-label={`Ir a slide ${index + 1}`}
+          />
+        ))}
       </div>
     </div>
   )
