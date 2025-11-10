@@ -1,11 +1,7 @@
-/* postcss-ignore */
 @tailwind base;
-/* postcss-ignore */
 @tailwind components;
-/* postcss-ignore */
 @tailwind utilities;
 
-/* CSS Variables - Dark Mode */
 :root {
   --color-1: #1c1c1c;
   --color-2: #3b3b3b;
@@ -17,16 +13,15 @@
   --text-tertiary: #b3b3b3;
 }
 
-/* CSS Variables - Light Mode (oscurecido) */
 :root.light {
-  --color-1: #bcbcbc;       /* Fondo base más neutro y menos brillante */
-  --color-2: #888888;       /* Fondo intermedio con contraste */
-  --color-3: #666666;       /* Fondo profundo para secciones destacadas */
-  --color-4: #a33a3a;       /* Rojo oscuro para acentos */
-  --color-5: #e04f4f;       /* Rojo vibrante para botones y CTA */
-  --text-primary: #1a1a1a;  /* Texto principal oscuro */
-  --text-secondary: #2e2e2e;/* Texto secundario más legible */
-  --text-tertiary: #4a4a4a; /* Texto terciario con buen contraste */
+  --color-1: #ffffff;
+  --color-2: #f3f4f6;
+  --color-3: #e5e7eb;
+  --color-4: #b91c1c;
+  --color-5: #ef4444;
+  --text-primary: #111827;
+  --text-secondary: #1f2937;
+  --text-tertiary: #4b5563;
 }
 body {
   margin: 0;

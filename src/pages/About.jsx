@@ -1,22 +1,13 @@
-// Importación del hook para acceder al contexto de tema
 import { useTheme } from '../context/ThemeContext'
-// Importación del componente de sección animada
 import AnimatedSection from '../components/AnimatedSection'
 
-/**
- * Componente About - Página "Sobre Mí"
- * Muestra información personal, historia, motivación y visión profesional
- */
 const About = () => {
-  // Obtiene el tema actual del contexto
   const { theme } = useTheme()
-  // Variable booleana que indica si el tema actual es claro
   const isLight = theme === 'light'
 
   return (
-    // Contenedor principal con imagen de fondo
     <div 
-      className="min-h-screen bg-custom-1 py-12 transition-colors duration-300 relative overflow-hidden"
+      className="relative overflow-hidden min-h-screen bg-white py-12 text-gray-900 transition-colors duration-300 dark:bg-custom-1 dark:text-white"
       style={{
         backgroundImage: `url('/images/background.jpg')`,
         backgroundSize: 'cover',
@@ -24,30 +15,18 @@ const About = () => {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      {/* Overlay con opacidad para mejorar la legibilidad del texto sobre la imagen */}
       <div 
         className="absolute inset-0 bg-custom-1 transition-colors duration-300"
-        style={{ opacity: isLight ? 0.5 : 0.1 }}
+        style={{ opacity: isLight ? 0 : 0.1 }}
       ></div>
-      {/* Contenedor del contenido con ancho máximo y padding responsivo */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <AnimatedSection>
-          {/* Tarjeta principal con el contenido */}
-          <div className={`bg-custom-2 rounded-lg shadow-lg p-8 md:p-12 border transition-colors duration-300 ${
-            isLight ? 'bg-custom-2 shadow-gray-400 border-gray-400' : 'shadow-black/50 border-custom-3/30'
-          }`}>
-            {/* Título principal de la página */}
-            <h1 className={`text-4xl font-bold mb-8 text-center font-['Space_Grotesk'] ${
-              isLight ? 'text-custom-5' : 'text-white'
-            }`}>
+          <div className="rounded-lg border border-gray-200 bg-white p-8 shadow-lg shadow-gray-200 transition-colors duration-300 md:p-12 dark:border-custom-3/30 dark:bg-custom-2 dark:shadow-black/50">
+            <h1 className="mb-8 text-center text-4xl font-bold font-['Space_Grotesk'] text-gray-900 transition-colors duration-300 dark:text-white">
               Sobre Mí
             </h1>
 
-          {/* Contenedor de las secciones de contenido */}
-          <div className={`space-y-6 ${
-            isLight ? 'text-gray-800' : 'text-gray-300'
-          }`}>
-            {/* Sección: Mi Historia */}
+          <div className="space-y-6 text-gray-800 transition-colors duration-300 dark:text-gray-300">
             <AnimatedSection delay={0.1}>
               <section>
                 <h2 className="text-2xl font-semibold text-custom-5 mb-4 font-['Space_Grotesk']">
@@ -62,7 +41,6 @@ const About = () => {
               </section>
             </AnimatedSection>
 
-            {/* Sección: Mi Motivación */}
             <AnimatedSection delay={0.2}>
               <section>
                 <h2 className="text-2xl font-semibold text-custom-5 mb-4 font-['Space_Grotesk']">
@@ -77,7 +55,6 @@ const About = () => {
               </section>
             </AnimatedSection>
 
-            {/* Sección: Transición Profesional */}
             <AnimatedSection delay={0.3}>
               <section>
                 <h2 className="text-2xl font-semibold text-custom-5 mb-4 font-['Space_Grotesk']">
@@ -93,7 +70,6 @@ const About = () => {
               </section>
             </AnimatedSection>
 
-            {/* Sección: Visión a Futuro */}
             <AnimatedSection delay={0.4}>
               <section>
                 <h2 className="text-2xl font-semibold text-custom-5 mb-4 font-['Space_Grotesk']">
@@ -110,11 +86,8 @@ const About = () => {
             </AnimatedSection>
           </div>
 
-          {/* Cita inspiracional al final */}
-          <div className="mt-12 pt-8 border-t border-custom-3/30">
-            <p className={`text-center italic font-['Sora'] ${
-              isLight ? 'text-custom-3' : 'text-gray-400'
-            }`}>
+          <div className="mt-12 border-t border-custom-3/30 pt-8">
+            <p className="text-center italic font-['Sora'] text-custom-3 transition-colors duration-300 dark:text-gray-400">
               "El futuro pertenece a aquellos que creen en la belleza de sus sueños."
             </p>
           </div>
@@ -125,6 +98,5 @@ const About = () => {
   )
 }
 
-// Exportación del componente About como exportación por defecto
 export default About
 
