@@ -20,4 +20,4 @@ React, Tailwind, Node.js, Vite, etc.
 - Branding coherente
 
 ## 📬 Contacto
-LinkedIn: https://www.linkedin.com/in/brianocampos/ | Email: brianmatias999@gmail.com| GitHub: github.com/campe111
+LinkedIn: https://www.linkedin.com/in/brianocampos/ | Email: brianmatias999@gmail.com| GitHub: github.com/campe111 | Instagram: https://www.instagram.com/cxmpedev?igsh=YnVzN2VkaHptNTZh
