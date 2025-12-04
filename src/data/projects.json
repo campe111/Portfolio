@@ -1,48 +1,51 @@
 [
   {
     "id": 1,
-    "title": "Sparta Gym",
-    "description": "Página web moderna para gimnasio con información sobre rutinas de entrenamiento, servicios y membresías. Diseño responsivo y atractivo para atraer nuevos miembros.",
-    "technologies": ["React", "Tailwind CSS", "Vercel"],
-    "image": "/images/sparta-gym.jpg",
-    "github": "https://github.com/campe111/Landing-page-Sparta-gym",
-    "demo": "https://spartagym-iota.vercel.app"
+    "title": "VentaSmart",
+    "description": "Sistema inteligente de gestión de ventas con control de inventario, seguimiento de clientes, facturación y reportes en tiempo real. Plataforma completa para optimizar procesos comerciales.",
+    "technologies": ["React", "Node.js", "MongoDB", "Tailwind CSS"],
+    "image": "/images/ventasmart.png",
+    "images": ["/images/ventasmart.png", "/images/ventasmart2.png", "/images/ventasmart3.png", "/images/ventasmart4.png", "/images/ventasmart5.png", "/images/ventasmart6.png", "/images/ventasmart7.png"],
+    "github": "https://github.com/VentaSmart2025/VentaSmart",
+    "demo": "https://ventasmart.com.ar"
   },
   {
     "id": 2,
-    "title": "GiA Electro",
-    "description": "E-commerce completo para tienda de electrodomésticos con catálogo de productos, carrito de compras y sistema de pagos integrado.",
-    "technologies": ["React", "Node.js", "MongoDB", "Tailwind CSS"],
-    "image": "/images/gia-electro.jpg",
-    "github": "https://github.com/campe111/Gia-Electro",
-    "demo": "https://gia-electro.vercel.app"
-  },
-  {
-    "id": 3,
     "title": "Artemis Creaciones",
     "description": "Portfolio y sitio web para empresa creativa, mostrando proyectos, servicios y galería de trabajos realizados con diseño elegante y profesional.",
     "technologies": ["React", "Framer Motion", "Tailwind CSS"],
-    "image": "/images/artemis-creaciones.jpg",
+    "image": "/images/artemis.png",
+    "images": ["/images/artemis.png", "/images/artemis2.png", "/images/artemis3.png", "/images/artemis5.png", "/images/artemis6.png", "/images/artemis7.png"],
     "github": "https://github.com/campe111/Artemis-creaciones",
     "demo": "https://artemis-creaciones.vercel.app"
   },
   {
-    "id": 4,
-    "title": "King of Coins Casino",
-    "description": "Plataforma de casino en línea con interfaz moderna, juegos interactivos y sistema de usuarios. Implementación de diseño gaming atractivo.",
-    "technologies": ["React", "TypeScript", "Vercel", "Tailwind CSS"],
-    "image": "/images/casino.jpg",
-    "github": "https://github.com/campe111/casino_",
-    "demo": "https://casino-six-orpin.vercel.app"
-  },
-  {
-    "id": 5,
+    "id": 3,
     "title": "Majo Rosaline",
     "description": "Landing page moderno y elegante, destacando trabajos creativos y proyectos personales con animaciones suaves y diseño minimalista.",
     "technologies": ["React", "Framer Motion", "Tailwind CSS", "Vercel"],
-    "image": "/images/majo-rosaline.jpg",
+    "image": "/images/rosaline.png",
+    "images": ["/images/rosaline.png", "/images/rosaline2.png", "/images/rosaline3.png", "/images/rosaline4.png", "/images/rosaline5.png", "/images/rosaline6.png"],
     "github": "https://github.com/campe111/MajoRosaline",
     "demo": "https://majo-rosaline.vercel.app"
+  },
+  {
+    "id": 4,
+    "title": "CRM",
+    "description": "Sistema de gestión de relaciones con clientes completo con gestión de contactos, seguimiento de ventas, tareas y reportes. Interfaz intuitiva para optimizar la gestión comercial.",
+    "technologies": ["React", "Node.js", "MongoDB", "Tailwind CSS"],
+    "image": "/images/CRM.png",
+    "images": ["/images/CRM.png", "/images/CRM1.png", "/images/CRM2.png", "/images/CRM3.png", "/images/CRM4.png", "/images/CRM5.png", "/images/CRM6.png", "/images/CRM7.png", "/images/CRM8.png", "/images/CRM9.png", "/images/CRM10.png", "/images/CRM11.png", "/images/CRM12.png"],
+    "github": "https://github.com/campe111/CRM-"
+  },
+  {
+    "id": 5,
+    "title": "GiA Electro",
+    "description": "E-commerce completo para tienda de electrodomésticos con catálogo de productos, carrito de compras y sistema de pagos integrado.",
+    "technologies": ["React", "Node.js", "MongoDB", "Tailwind CSS"],
+    "image": "/images/gia.png",
+    "images": ["/images/gia.png", "/images/gia2.png", "/images/gia3.png", "/images/gia4.png", "/images/gia5.png", "/images/gia6.png"],
+    "github": "https://github.com/campe111/Gia-Electro",
+    "demo": "https://gia-electro.vercel.app"
   }
 ]
-

@@ -238,10 +238,10 @@ const Home = () => {
             <div className="rounded-3xl border border-white/20 bg-gradient-to-br from-custom-2 to-custom-3 px-10 pt-6 pb-8 shadow-2xl shadow-black/40 backdrop-blur-xl hover:border-custom-4/30 transition-all duration-300" style={{ overflow: 'visible' }}>
               <h2 className="mb-6 text-center text-3xl md:text-4xl font-bold font-['Space_Grotesk'] transition-all duration-300">
                 <span 
-                  className={`bg-gradient-to-r bg-clip-text text-transparent transition-all duration-300 ${
+                  className={`transition-all duration-300 ${
                     theme === 'light' 
-                      ? 'from-[#0D0D0D] via-[#2a2a2a] via-[#1a1a1a] to-[#0D0D0D]' 
-                      : 'from-custom-5 via-custom-4 to-custom-5'
+                      ? 'text-white' 
+                      : 'bg-gradient-to-r bg-clip-text text-transparent from-custom-5 via-custom-4 to-custom-5'
                   }`}
                 >
                   Tecnologías que Domino
