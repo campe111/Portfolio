@@ -198,7 +198,7 @@ const Contact = () => {
                   <span className="font-medium text-white transition-colors duration-300 group-hover:text-custom-4">LinkedIn</span>
                 </a>
                 <a
-                  href="https://www.instagram.com/cxmpe?igsh=aWxpb2pjMHZnM2Nk"
+                  href="https://www.instagram.com/cxmpedev?igsh=YnVzN2VkaHptNTZh"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center rounded-lg border border-white/10 bg-black/40 p-4 transition-all duration-300 hover:border-custom-4/50 hover:bg-black/60 hover:scale-105 group"

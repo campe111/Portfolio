@@ -19,7 +19,7 @@ const ProjectCard = ({ project, index = 0 }) => {
 
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % images.length)
-    }, 3000) // Cambia cada 3 segundos
+    }, 2000) // Cambia cada 2 segundos
 
     return () => clearInterval(interval)
   }, [images.length])
@@ -72,15 +72,14 @@ const ProjectCard = ({ project, index = 0 }) => {
         className="group rounded-xl overflow-hidden transition-all duration-300 border bg-gradient-to-br from-[var(--bg-secondary)]/90 to-[var(--bg-tertiary)]/90 shadow-xl shadow-[var(--shadow-color)] hover:shadow-2xl hover:shadow-custom-4/20 border-[var(--border-color)] backdrop-blur-sm"
       >
         <div className="relative h-48 bg-[var(--bg-primary)] overflow-hidden cursor-pointer" onClick={() => openModal(currentImageIndex)}>
-          <AnimatePresence mode="wait">
+          <AnimatePresence>
             <motion.img
               key={currentImageIndex}
               src={images[currentImageIndex]}
               alt={`${project.title} - Imagen ${currentImageIndex + 1}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.25 }}
               className="w-full h-full object-cover"
               onError={(e) => {
                 e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%231c1c1c" width="400" height="300"/%3E%3Ctext fill="%23d84f4f" font-family="sans-serif" font-size="20" x="50%25" y="50%25" text-anchor="middle" dy=".3em"%3EProyecto%3C/text%3E%3C/svg%3E'

@@ -35,7 +35,7 @@ const Navbar = () => {
   const handleCVClick = (e) => {
     e.preventDefault()
     // Abrir el CV en una nueva pestaña
-    window.open('/Ocampos-DesarrolloWeb.pdf', '_blank')
+    window.open('/CV-OcamposDEV.pdf', '_blank')
   }
 
   return (
