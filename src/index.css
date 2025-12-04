@@ -3,26 +3,42 @@
 @tailwind utilities;
 
 :root {
-  --color-1: #1c1c1c;
-  --color-2: #3b3b3b;
-  --color-3: #5c5c5c;
-  --color-4: #9b3b3b;
-  --color-5: #d84f4f;
-  --text-primary: #ffffff;
-  --text-secondary: #e5e5e5;
-  --text-tertiary: #b3b3b3;
+  /* Colores base (siempre los mismos) */
+  --color-1: #0D0D0D;
+  --color-2: #565940;
+  --color-3: #808C65;
+  --color-4: #B4BF60;
+  --color-5: #E5F2D0;
+  
+  /* Dark mode (por defecto) */
+  --bg-primary: #0D0D0D;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #2a2a2a;
+  --text-primary: #E5F2D0;
+  --text-secondary: #B4BF60;
+  --text-tertiary: #808C65;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --brand-gradient-from: #E5F2D0;
+  --brand-gradient-via: #B4BF60;
+  --brand-gradient-to: #E5F2D0;
 }
 
+/* Light mode */
 :root.light {
-  --color-1: #ffffff;
-  --color-2: #f3f4f6;
-  --color-3: #e5e7eb;
-  --color-4: #b91c1c;
-  --color-5: #ef4444;
-  --text-primary: #111827;
-  --text-secondary: #1f2937;
-  --text-tertiary: #4b5563;
+  --bg-primary: #E5F2D0;
+  --bg-secondary: #FFFFFF;
+  --bg-tertiary: #FFFFFF;
+  --text-primary: #0D0D0D;
+  --text-secondary: #808C65;
+  --text-tertiary: #565940;
+  --border-color: rgba(128, 140, 101, 0.3);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --brand-gradient-from: #808C65;
+  --brand-gradient-via: #B4BF60;
+  --brand-gradient-to: #808C65;
 }
+
 body {
   margin: 0;
   font-family: 'Inter', 'Space Grotesk', 'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -30,15 +46,91 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--color-1);
+  background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-
-
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* Efectos de gradiente modernos */
+@layer utilities {
+  .gradient-text {
+    @apply bg-gradient-to-r from-custom-5 via-custom-4 to-custom-5 bg-clip-text text-transparent;
+  }
+
+  .gradient-border {
+    @apply relative;
+  }
+
+  .gradient-border::before {
+    content: '';
+    @apply absolute inset-0 rounded-lg p-[1px] bg-gradient-to-r from-custom-5 via-custom-4 to-custom-5;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .glass-effect {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .glow-effect {
+    box-shadow: 0 0 20px rgba(180, 191, 96, 0.3), 0 0 40px rgba(180, 191, 96, 0.2);
+  }
+
+  .hover-lift {
+    @apply transition-transform duration-300 ease-out;
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-1 scale-[1.02];
+  }
+
+  .skill-card-3d {
+    box-shadow: 
+      0 10px 25px rgba(0, 0, 0, 0.5),
+      0 5px 15px rgba(0, 0, 0, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(180, 191, 96, 0.1) inset;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .skill-card-3d:hover {
+    box-shadow: 
+      0 15px 35px rgba(0, 0, 0, 0.6),
+      0 10px 25px rgba(0, 0, 0, 0.4),
+      0 5px 15px rgba(180, 191, 96, 0.25),
+      0 0 10px rgba(180, 191, 96, 0.15),
+      0 0 0 1px rgba(180, 191, 96, 0.2) inset;
+  }
+}
+
+/* Animaciones personalizadas */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Efecto de partículas de fondo (opcional - puedes activarlo si quieres) */
+.bg-pattern {
+  background-image: 
+    radial-gradient(at 20% 50%, rgba(180, 191, 96, 0.05) 0px, transparent 50%),
+    radial-gradient(at 80% 80%, rgba(128, 140, 101, 0.05) 0px, transparent 50%),
+    radial-gradient(at 40% 20%, rgba(180, 191, 96, 0.03) 0px, transparent 50%);
 }
 
 

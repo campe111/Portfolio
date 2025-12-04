@@ -1,30 +1,48 @@
 [
   {
     "id": 1,
-    "title": "Proyecto Ejemplo 1",
-    "description": "Una aplicación web moderna desarrollada con React y Node.js que permite gestionar tareas de manera eficiente.",
-    "technologies": ["React", "Node.js", "MongoDB"],
-    "image": "/images/project1.jpg",
-    "github": "https://github.com/brian/proyecto1",
-    "demo": "https://proyecto1-demo.vercel.app"
+    "title": "Sparta Gym",
+    "description": "Página web moderna para gimnasio con información sobre rutinas de entrenamiento, servicios y membresías. Diseño responsivo y atractivo para atraer nuevos miembros.",
+    "technologies": ["React", "Tailwind CSS", "Vercel"],
+    "image": "/images/sparta-gym.jpg",
+    "github": "https://github.com/campe111/Landing-page-Sparta-gym",
+    "demo": "https://spartagym-iota.vercel.app"
   },
   {
     "id": 2,
-    "title": "Proyecto Ejemplo 2",
-    "description": "Sistema de e-commerce con carrito de compras, integración de pagos y panel de administración.",
-    "technologies": ["React", "Express", "PostgreSQL"],
-    "image": "/images/project2.jpg",
-    "github": "https://github.com/brian/proyecto2",
-    "demo": "https://proyecto2-demo.vercel.app"
+    "title": "GiA Electro",
+    "description": "E-commerce completo para tienda de electrodomésticos con catálogo de productos, carrito de compras y sistema de pagos integrado.",
+    "technologies": ["React", "Node.js", "MongoDB", "Tailwind CSS"],
+    "image": "/images/gia-electro.jpg",
+    "github": "https://github.com/campe111/Gia-Electro",
+    "demo": "https://gia-electro.vercel.app"
   },
   {
     "id": 3,
-    "title": "Proyecto Ejemplo 3",
-    "description": "Plataforma de aprendizaje en línea con videos, quizzes y certificados.",
-    "technologies": ["React", "Firebase", "Tailwind CSS"],
-    "image": "/images/project3.jpg",
-    "github": "https://github.com/brian/proyecto3",
-    "demo": "https://proyecto3-demo.vercel.app"
+    "title": "Artemis Creaciones",
+    "description": "Portfolio y sitio web para empresa creativa, mostrando proyectos, servicios y galería de trabajos realizados con diseño elegante y profesional.",
+    "technologies": ["React", "Framer Motion", "Tailwind CSS"],
+    "image": "/images/artemis-creaciones.jpg",
+    "github": "https://github.com/campe111/Artemis-creaciones",
+    "demo": "https://artemis-creaciones.vercel.app"
+  },
+  {
+    "id": 4,
+    "title": "King of Coins Casino",
+    "description": "Plataforma de casino en línea con interfaz moderna, juegos interactivos y sistema de usuarios. Implementación de diseño gaming atractivo.",
+    "technologies": ["React", "TypeScript", "Vercel", "Tailwind CSS"],
+    "image": "/images/casino.jpg",
+    "github": "https://github.com/campe111/casino_",
+    "demo": "https://casino-six-orpin.vercel.app"
+  },
+  {
+    "id": 5,
+    "title": "Majo Rosaline",
+    "description": "Landing page moderno y elegante, destacando trabajos creativos y proyectos personales con animaciones suaves y diseño minimalista.",
+    "technologies": ["React", "Framer Motion", "Tailwind CSS", "Vercel"],
+    "image": "/images/majo-rosaline.jpg",
+    "github": "https://github.com/campe111/MajoRosaline",
+    "demo": "https://majo-rosaline.vercel.app"
   }
 ]
 

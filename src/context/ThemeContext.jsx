@@ -12,14 +12,23 @@ export const useTheme = () => {
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
+    // Obtener el tema guardado en localStorage o usar 'dark' por defecto
     const savedTheme = localStorage.getItem('theme')
     return savedTheme || 'dark'
   })
 
   useEffect(() => {
+    // Aplicar el tema al documento
+    const root = document.documentElement
+    if (theme === 'light') {
+      root.classList.add('light')
+      root.classList.remove('dark')
+    } else {
+      root.classList.add('dark')
+      root.classList.remove('light')
+    }
+    // Guardar en localStorage
     localStorage.setItem('theme', theme)
-    document.documentElement.classList.remove('light', 'dark')
-    document.documentElement.classList.add(theme)
   }, [theme])
 
   const toggleTheme = () => {
