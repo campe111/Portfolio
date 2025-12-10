@@ -34,15 +34,15 @@ const Footer = () => {
 
   return (
     <footer className="mt-auto border-t backdrop-blur-md text-[var(--text-tertiary)] shadow-2xl transition-colors duration-300 border-[var(--border-color)] bg-gradient-to-b from-[var(--bg-primary)] to-[var(--bg-primary)]/80 shadow-[var(--shadow-color)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 md:py-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2 md:py-4">
         {/* Mobile Layout */}
         <div className="md:hidden space-y-3 mb-3">
-          {/* Enlaces Rápidos en línea horizontal */}
-          <div>
-            <h3 className="text-xs font-semibold font-['Space_Grotesk'] text-white mb-1">
+          {/* Enlaces Rápidos en línea horizontal centrado */}
+          <div className="text-center">
+            <h3 className="text-xs font-semibold font-['Space_Grotesk'] text-white mb-1.5">
               Enlaces Rápidos
             </h3>
-            <ul className="flex flex-wrap gap-x-3 gap-y-1">
+            <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1">
               <li>
                 <a href="/" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
                   Inicio
@@ -66,14 +66,14 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Redes Sociales y Proyecto en línea horizontal */}
-          <div className="flex flex-wrap gap-x-4 gap-y-2">
+          {/* Redes Sociales y Proyecto centrados */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
             {/* Redes Sociales */}
-            <div className="p-0">
-              <h3 className="text-xs font-semibold font-['Space_Grotesk'] text-white mb-1">
+            <div className="p-0 text-center sm:text-left">
+              <h3 className="text-xs font-semibold font-['Space_Grotesk'] text-white mb-1.5">
                 Sígueme en redes
               </h3>
-              <div className="flex flex-wrap gap-1">
+              <div className="flex flex-wrap justify-center sm:justify-start gap-1.5">
                 {socialLinks.map((link, index) => (
                   <motion.a
                     key={link.name}
@@ -96,11 +96,11 @@ const Footer = () => {
             </div>
 
             {/* Sección de Proyecto */}
-            <div>
-              <h3 className="text-xs font-semibold font-['Space_Grotesk'] text-white mb-1">
+            <div className="text-center sm:text-left">
+              <h3 className="text-xs font-semibold font-['Space_Grotesk'] text-white mb-1.5">
                 ¿Tenés un proyecto?
               </h3>
-              <div className="flex flex-wrap gap-x-2 gap-y-1 text-white/70">
+              <div className="flex flex-wrap justify-center sm:justify-start gap-x-3 gap-y-1 text-white/70">
                 <a
                   href="mailto:brianmatias999@gmail.com"
                   className="flex items-center gap-1 hover:text-custom-4 transition-colors duration-300"
