@@ -34,8 +34,120 @@ const Footer = () => {
 
   return (
     <footer className="mt-auto border-t backdrop-blur-md text-[var(--text-tertiary)] shadow-2xl transition-colors duration-300 border-[var(--border-color)] bg-gradient-to-b from-[var(--bg-primary)] to-[var(--bg-primary)]/80 shadow-[var(--shadow-color)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 md:py-4">
+        {/* Mobile Layout */}
+        <div className="md:hidden space-y-3 mb-3">
+          {/* Enlaces Rápidos en línea horizontal */}
+          <div>
+            <h3 className="text-xs font-semibold font-['Space_Grotesk'] text-white mb-1">
+              Enlaces Rápidos
+            </h3>
+            <ul className="flex flex-wrap gap-x-3 gap-y-1">
+              <li>
+                <a href="/" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
+                  Inicio
+                </a>
+              </li>
+              <li>
+                <a href="/about" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
+                  Sobre Mí
+                </a>
+              </li>
+              <li>
+                <a href="/projects" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
+                  Proyectos
+                </a>
+              </li>
+              <li>
+                <a href="/contact" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
+                  Contacto
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Redes Sociales y Proyecto en línea horizontal */}
+          <div className="flex flex-wrap gap-x-4 gap-y-2">
+            {/* Redes Sociales */}
+            <div className="p-0">
+              <h3 className="text-xs font-semibold font-['Space_Grotesk'] text-white mb-1">
+                Sígueme en redes
+              </h3>
+              <div className="flex flex-wrap gap-1">
+                {socialLinks.map((link, index) => (
+                  <motion.a
+                    key={link.name}
+                    href={link.href}
+                    target={link.href.startsWith('mailto:') ? undefined : '_blank'}
+                    rel={link.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center justify-center w-6 h-6 rounded-lg bg-white/5 border border-white/10 text-white/70 hover:text-custom-4 hover:border-custom-4/50 hover:bg-white/10 transition-all duration-300"
+                    aria-label={link.name}
+                  >
+                    {link.icon}
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+
+            {/* Sección de Proyecto */}
+            <div>
+              <h3 className="text-xs font-semibold font-['Space_Grotesk'] text-white mb-1">
+                ¿Tenés un proyecto?
+              </h3>
+              <div className="flex flex-wrap gap-x-2 gap-y-1 text-white/70">
+                <a
+                  href="mailto:brianmatias999@gmail.com"
+                  className="flex items-center gap-1 hover:text-custom-4 transition-colors duration-300"
+                >
+                  <svg
+                    className="w-3 h-3"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
+                  </svg>
+                  <span className="font-['Inter'] text-[10px]">Email</span>
+                </a>
+                <a
+                  href="https://wa.me/5492284505500"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 hover:text-custom-4 transition-colors duration-300"
+                >
+                  <svg
+                    className="w-3 h-3"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 5a2 2 0 012-2h2.28a1 1 0 01.948.684l1.122 3.367a1 1 0 01-.502 1.21l-1.21.605a11.042 11.042 0 005.516 5.516l.605-1.21a1 1 0 011.21-.502l3.367 1.122a1 1 0 01.684.948V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                    />
+                  </svg>
+                  <span className="font-['Inter'] text-[10px]">WhatsApp</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Layout */}
+        <div className="hidden md:grid grid-cols-3 gap-4 mb-4">
           {/* Enlaces Rápidos */}
           <div>
             <h3 className="text-sm font-semibold font-['Space_Grotesk'] text-white mb-2">
@@ -143,8 +255,8 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-white/10 pt-2 mt-2">
-          <p className="text-center text-white/60 font-['Inter'] text-xs">
+        <div className="border-t border-white/10 pt-1.5 md:pt-2 mt-1.5 md:mt-2">
+          <p className="text-center text-white/60 font-['Inter'] text-[10px] md:text-xs">
             © {new Date().getFullYear()} Brian Matias Ocampos. Todos los derechos reservados.
           </p>
         </div>
