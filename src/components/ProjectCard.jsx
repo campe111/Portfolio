@@ -5,11 +5,29 @@ const ProjectCard = ({ project, index = 0 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalImageIndex, setModalImageIndex] = useState(0)
+  const [imagesLoaded, setImagesLoaded] = useState(new Set([0]))
 
   // Obtener todas las imágenes disponibles
   const images = project.images && project.images.length > 0 
     ? project.images 
     : [project.image || '/placeholder-project.jpg']
+
+  // Pre-cargar la siguiente imagen antes de que se necesite
+  useEffect(() => {
+    if (images.length <= 1) return
+
+    const preloadImage = (src) => {
+      const img = new Image()
+      img.src = src
+    }
+
+    // Pre-cargar la siguiente imagen cuando cambia currentImageIndex
+    const nextIndex = (currentImageIndex + 1) % images.length
+    if (!imagesLoaded.has(nextIndex)) {
+      preloadImage(images[nextIndex])
+      setImagesLoaded(prev => new Set([...prev, nextIndex]))
+    }
+  }, [currentImageIndex, images, imagesLoaded])
 
   // Carrusel automático en la card con delay único por card
   useEffect(() => {
@@ -81,7 +99,7 @@ const ProjectCard = ({ project, index = 0 }) => {
         whileHover={{ y: -8 }}
         className="group rounded-xl overflow-hidden transition-all duration-300 border bg-gradient-to-br from-[var(--bg-secondary)]/90 to-[var(--bg-tertiary)]/90 shadow-xl shadow-[var(--shadow-color)] hover:shadow-2xl hover:shadow-custom-4/20 border-[var(--border-color)] backdrop-blur-sm"
       >
-        <div className="relative h-48 bg-[var(--bg-primary)] overflow-hidden cursor-pointer" onClick={() => openModal(currentImageIndex)} style={{ contain: 'layout style paint' }}>
+        <div className="relative h-48 md:h-56 lg:h-64 bg-[var(--bg-primary)] overflow-hidden cursor-pointer" onClick={() => openModal(currentImageIndex)} style={{ contain: 'layout style paint' }}>
           <AnimatePresence initial={false} custom={currentImageIndex}>
             <motion.img
               key={currentImageIndex}
@@ -97,12 +115,25 @@ const ProjectCard = ({ project, index = 0 }) => {
               }}
               className="absolute inset-0 w-full h-full object-cover"
               style={{ willChange: 'transform, opacity' }}
-              loading="lazy"
+              loading={currentImageIndex === 0 && index < 3 ? 'eager' : 'lazy'}
+              fetchPriority={currentImageIndex === 0 && index < 3 ? 'high' : 'auto'}
+              decoding="async"
               onError={(e) => {
                 e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%231c1c1c" width="400" height="300"/%3E%3Ctext fill="%23d84f4f" font-family="sans-serif" font-size="20" x="50%25" y="50%25" text-anchor="middle" dy=".3em"%3EProyecto%3C/text%3E%3C/svg%3E'
               }}
             />
           </AnimatePresence>
+          
+          {/* Pre-cargar la siguiente imagen ocultamente */}
+          {images.length > 1 && (
+            <img
+              src={images[(currentImageIndex + 1) % images.length]}
+              alt=""
+              className="hidden"
+              loading="eager"
+              aria-hidden="true"
+            />
+          )}
           
           {/* Indicadores de múltiples imágenes */}
           {images.length > 1 && (
@@ -134,7 +165,7 @@ const ProjectCard = ({ project, index = 0 }) => {
           </div>
         </div>
         <div 
-          className="p-6 transition-all duration-300 relative"
+          className="p-4 md:p-6 transition-all duration-300 relative"
           style={{
             backgroundImage: 'url(/fondo-hero.jpeg)',
             backgroundSize: 'cover',
@@ -145,24 +176,24 @@ const ProjectCard = ({ project, index = 0 }) => {
           {/* Overlay oscuro sobre la imagen */}
           <div className="absolute inset-0 bg-black/60"></div>
           <div className="relative z-10">
-          <h3 className="text-xl font-bold mb-3 text-white group-hover:text-custom-4 transition-colors duration-300">
+          <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3 text-white group-hover:text-custom-4 transition-colors duration-300">
             {project.title}
           </h3>
-          <p className="mb-4 line-clamp-3 text-white/90 leading-relaxed">{project.description}</p>
-          <div className="flex flex-wrap gap-2 mb-5">
+          <p className="mb-3 md:mb-4 line-clamp-3 text-sm md:text-base text-white/90 leading-relaxed">{project.description}</p>
+          <div className="flex flex-wrap gap-1.5 md:gap-2 mb-4 md:mb-5">
             {project.technologies.map((tech, techIndex) => (
               <motion.span
                 key={techIndex}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: techIndex * 0.05 }}
-                className="px-3 py-1 text-xs font-medium rounded-full backdrop-blur-sm transition-all duration-300 bg-gradient-to-r from-custom-2/20 to-custom-4/20 text-white border border-custom-2/40 hover:border-custom-2 hover:bg-custom-2/30"
+                className="px-2 md:px-3 py-0.5 md:py-1 text-[10px] md:text-xs font-medium rounded-full backdrop-blur-sm transition-all duration-300 bg-gradient-to-r from-custom-2/20 to-custom-4/20 text-white border border-custom-2/40 hover:border-custom-2 hover:bg-custom-2/30"
               >
                 {tech}
               </motion.span>
             ))}
           </div>
-          <div className="flex space-x-3">
+          <div className="flex flex-col sm:flex-row gap-2 md:gap-3 sm:space-x-0">
             {project.github && (
               <motion.a
                 href={project.github}
@@ -170,7 +201,7 @@ const ProjectCard = ({ project, index = 0 }) => {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex-1 bg-[var(--bg-tertiary)] text-[var(--text-primary)] text-center py-2.5 rounded-lg border border-custom-4/30 font-medium transition-all duration-300 hover:bg-custom-4 hover:border-custom-4 hover:text-custom-1 hover:shadow-lg hover:shadow-custom-4/30"
+                className="flex-1 bg-[var(--bg-tertiary)] text-[var(--text-primary)] text-center py-2 md:py-2.5 rounded-lg border border-custom-4/30 text-sm md:text-base font-medium transition-all duration-300 hover:bg-custom-4 hover:border-custom-4 hover:text-custom-1 hover:shadow-lg hover:shadow-custom-4/30"
               >
                 GitHub
               </motion.a>
@@ -182,7 +213,7 @@ const ProjectCard = ({ project, index = 0 }) => {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex-1 bg-custom-4 text-white text-center py-2.5 rounded-lg font-medium shadow-lg shadow-custom-4/40 transition-all duration-300 hover:shadow-xl hover:shadow-custom-4/50 hover:bg-custom-4/90"
+                className="flex-1 bg-custom-4 text-white text-center py-2 md:py-2.5 rounded-lg text-sm md:text-base font-medium shadow-lg shadow-custom-4/40 transition-all duration-300 hover:shadow-xl hover:shadow-custom-4/50 hover:bg-custom-4/90"
               >
                 Demo
               </motion.a>
