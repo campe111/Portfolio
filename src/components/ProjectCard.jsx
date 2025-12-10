@@ -11,16 +11,28 @@ const ProjectCard = ({ project, index = 0 }) => {
     ? project.images 
     : [project.image || '/placeholder-project.jpg']
 
-  // Carrusel automático en la card
+  // Carrusel automático en la card con delay único por card
   useEffect(() => {
     if (images.length <= 1) return
 
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % images.length)
-    }, 2000) // Cambia cada 2 segundos
+    // Delay inicial diferente para cada card basado en su índice
+    // Cada card tendrá un offset de 800ms adicionales (ajustado para mejor efecto)
+    const initialDelay = index * 800 // 0ms, 800ms, 1600ms, 2400ms, etc.
 
-    return () => clearInterval(interval)
-  }, [images.length])
+    let interval
+    
+    const timeoutId = setTimeout(() => {
+      // Después del delay inicial, comenzar el intervalo
+      interval = setInterval(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % images.length)
+      }, 3500) // Cambia cada 3.5 segundos (ajustado para dar tiempo a la animación)
+    }, initialDelay)
+
+    return () => {
+      clearTimeout(timeoutId)
+      if (interval) clearInterval(interval)
+    }
+  }, [images.length, index])
 
   // Navegación con teclado en el modal
   useEffect(() => {
@@ -69,16 +81,23 @@ const ProjectCard = ({ project, index = 0 }) => {
         whileHover={{ y: -8 }}
         className="group rounded-xl overflow-hidden transition-all duration-300 border bg-gradient-to-br from-[var(--bg-secondary)]/90 to-[var(--bg-tertiary)]/90 shadow-xl shadow-[var(--shadow-color)] hover:shadow-2xl hover:shadow-custom-4/20 border-[var(--border-color)] backdrop-blur-sm"
       >
-        <div className="relative h-48 bg-[var(--bg-primary)] overflow-hidden cursor-pointer" onClick={() => openModal(currentImageIndex)}>
-          <AnimatePresence>
+        <div className="relative h-48 bg-[var(--bg-primary)] overflow-hidden cursor-pointer" onClick={() => openModal(currentImageIndex)} style={{ contain: 'layout style paint' }}>
+          <AnimatePresence initial={false} custom={currentImageIndex}>
             <motion.img
               key={currentImageIndex}
               src={images[currentImageIndex]}
               alt={`${project.title} - Imagen ${currentImageIndex + 1}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.25 }}
-              className="w-full h-full object-cover"
+              custom={currentImageIndex}
+              initial={{ opacity: 0, x: 300 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -300 }}
+              transition={{ 
+                duration: 0.5,
+                ease: [0.4, 0, 0.2, 1]
+              }}
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ willChange: 'transform, opacity' }}
+              loading="lazy"
               onError={(e) => {
                 e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%231c1c1c" width="400" height="300"/%3E%3Ctext fill="%23d84f4f" font-family="sans-serif" font-size="20" x="50%25" y="50%25" text-anchor="middle" dy=".3em"%3EProyecto%3C/text%3E%3C/svg%3E'
               }}

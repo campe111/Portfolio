@@ -238,7 +238,8 @@ const Home = () => {
             backgroundImage: 'url(/fondo-hero.jpeg)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat'
+            backgroundRepeat: 'no-repeat',
+            backgroundAttachment: 'fixed'
           }}
         >
           {/* Overlay oscuro sobre la imagen */}

@@ -1,10 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import AnimatedSection from '../components/AnimatedSection'
-import { useTheme } from '../context/ThemeContext'
 import { motion } from 'framer-motion'
 
 const About = () => {
-  const { theme } = useTheme()
   const quote = "El futuro pertenece a aquellos que creen en la belleza de sus sueños."
   const [displayedQuote, setDisplayedQuote] = useState('')
   const [showCursor, setShowCursor] = useState(false)
@@ -49,7 +47,18 @@ const About = () => {
     }
   }, [hasStarted, quote])
   return (
-    <div className="relative min-h-screen py-12 text-[var(--text-primary)] transition-all duration-300" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+    <div 
+      className="relative min-h-screen py-12 text-[var(--text-primary)] transition-all duration-300"
+      style={{ 
+        backgroundImage: 'url(/fondo-hero.jpeg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed'
+      }}
+    >
+      {/* Overlay oscuro sobre la imagen */}
+      <div className="absolute inset-0 bg-black/50"></div>
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection>
           <div className="rounded-3xl border border-white/20 bg-gradient-to-br from-custom-2 to-custom-3 p-8 shadow-2xl shadow-black/40 backdrop-blur-xl hover:border-custom-4/30 transition-all duration-300 md:p-12">

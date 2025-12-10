@@ -77,7 +77,18 @@ const Contact = () => {
   }
 
   return (
-    <div className="relative min-h-screen py-12 text-[var(--text-primary)] transition-all duration-300" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+    <div 
+      className="relative min-h-screen py-12 text-[var(--text-primary)] transition-all duration-300"
+      style={{ 
+        backgroundImage: 'url(/fondo-hero.jpeg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        backgroundAttachment: 'fixed'
+      }}
+    >
+      {/* Overlay oscuro sobre la imagen */}
+      <div className="absolute inset-0 bg-black/50"></div>
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection>
           <div className="mb-12 text-center">
