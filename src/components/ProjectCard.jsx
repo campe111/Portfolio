@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useTheme } from '../context/ThemeContext'
 
 const ProjectCard = ({ project, index = 0 }) => {
-  const { theme } = useTheme()
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalImageIndex, setModalImageIndex] = useState(0)
@@ -117,15 +115,22 @@ const ProjectCard = ({ project, index = 0 }) => {
             </motion.div>
           </div>
         </div>
-        <div className={`p-6 transition-all duration-300 ${
-          theme === 'light'
-            ? 'bg-[#C4D89A]'
-            : 'bg-gradient-to-br from-custom-2/95 to-custom-3/95'
-        }`}>
-          <h3 className="text-xl font-bold mb-3 text-[var(--text-primary)] group-hover:text-custom-4 transition-colors duration-300">
+        <div 
+          className="p-6 transition-all duration-300 relative"
+          style={{
+            backgroundImage: 'url(/fondo-hero.jpeg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
+        >
+          {/* Overlay oscuro sobre la imagen */}
+          <div className="absolute inset-0 bg-black/60"></div>
+          <div className="relative z-10">
+          <h3 className="text-xl font-bold mb-3 text-white group-hover:text-custom-4 transition-colors duration-300">
             {project.title}
           </h3>
-          <p className="mb-4 line-clamp-3 text-[var(--text-tertiary)] leading-relaxed">{project.description}</p>
+          <p className="mb-4 line-clamp-3 text-white/90 leading-relaxed">{project.description}</p>
           <div className="flex flex-wrap gap-2 mb-5">
             {project.technologies.map((tech, techIndex) => (
               <motion.span
@@ -133,11 +138,7 @@ const ProjectCard = ({ project, index = 0 }) => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: techIndex * 0.05 }}
-                className={`px-3 py-1 text-xs font-medium rounded-full backdrop-blur-sm transition-all duration-300 ${
-                  theme === 'light'
-                    ? 'bg-gradient-to-r from-[#E5F2D0] to-[#B4BF60] text-[#0D0D0D] border border-[#808C65]/40 hover:border-[#808C65] hover:bg-gradient-to-r hover:from-[#B4BF60] hover:to-[#808C65]'
-                    : 'bg-gradient-to-r from-custom-5/20 to-custom-4/20 text-custom-5 border border-custom-5/40 hover:border-custom-5 hover:bg-custom-5/30'
-                }`}
+                className="px-3 py-1 text-xs font-medium rounded-full backdrop-blur-sm transition-all duration-300 bg-gradient-to-r from-custom-2/20 to-custom-4/20 text-white border border-custom-2/40 hover:border-custom-2 hover:bg-custom-2/30"
               >
                 {tech}
               </motion.span>
@@ -163,11 +164,12 @@ const ProjectCard = ({ project, index = 0 }) => {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex-1 bg-custom-4 text-custom-1 text-center py-2.5 rounded-lg font-medium shadow-lg shadow-custom-4/40 transition-all duration-300 hover:shadow-xl hover:shadow-custom-4/50 hover:bg-custom-4/90"
+                className="flex-1 bg-custom-4 text-white text-center py-2.5 rounded-lg font-medium shadow-lg shadow-custom-4/40 transition-all duration-300 hover:shadow-xl hover:shadow-custom-4/50 hover:bg-custom-4/90"
               >
                 Demo
               </motion.a>
             )}
+          </div>
           </div>
         </div>
       </motion.div>

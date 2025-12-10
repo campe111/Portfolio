@@ -3,40 +3,58 @@
 @tailwind utilities;
 
 :root {
-  /* Colores base (siempre los mismos) */
-  --color-1: #0D0D0D;
-  --color-2: #565940;
-  --color-3: #808C65;
-  --color-4: #B4BF60;
-  --color-5: #E5F2D0;
+  /* Colores base - Nueva paleta */
+  --color-1: #FFA500; /* Naranja */
+  --color-2: #0A0A2A; /* Azul muy oscuro */
+  --color-3: #40E0D0; /* Turquesa */
+  --color-4: #00BFFF; /* Cyan brillante */
+  --color-5: #1C1C1C; /* Gris oscuro */
   
   /* Dark mode (por defecto) */
-  --bg-primary: #0D0D0D;
-  --bg-secondary: #1a1a1a;
+  --bg-primary: #0A0A2A;
+  --bg-secondary: #1C1C1C;
   --bg-tertiary: #2a2a2a;
-  --text-primary: #E5F2D0;
-  --text-secondary: #B4BF60;
-  --text-tertiary: #808C65;
-  --border-color: rgba(255, 255, 255, 0.1);
+  --bg-section: #0A0A2A;
+  --bg-card: #1C1C1C;
+  --text-primary: #40E0D0;
+  --text-secondary: #FFA500;
+  --text-tertiary: #00BFFF;
+  --border-color: rgba(64, 224, 208, 0.2);
+  --border-hover: rgba(0, 191, 255, 0.4);
   --shadow-color: rgba(0, 0, 0, 0.5);
-  --brand-gradient-from: #E5F2D0;
-  --brand-gradient-via: #B4BF60;
-  --brand-gradient-to: #E5F2D0;
+  --shadow-lg: rgba(0, 0, 0, 0.3);
+  --brand-gradient-from: #40E0D0;
+  --brand-gradient-via: #00BFFF;
+  --brand-gradient-to: #40E0D0;
+  --accent-color: #FFA500;
+  --accent-hover: #ffb733;
+  --overlay-bg: rgba(0, 0, 0, 0.4);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
 }
 
 /* Light mode */
 :root.light {
-  --bg-primary: #E5F2D0;
+  --bg-primary: #F0F8FF; /* Azul muy claro */
   --bg-secondary: #FFFFFF;
-  --bg-tertiary: #FFFFFF;
-  --text-primary: #0D0D0D;
-  --text-secondary: #808C65;
-  --text-tertiary: #565940;
-  --border-color: rgba(128, 140, 101, 0.3);
+  --bg-tertiary: #E8F4F8;
+  --bg-section: #F0F8FF;
+  --bg-card: #FFFFFF;
+  --text-primary: #0A0A2A;
+  --text-secondary: #FFA500;
+  --text-tertiary: #1C1C1C;
+  --border-color: rgba(0, 191, 255, 0.4);
+  --border-hover: rgba(255, 165, 0, 0.6);
   --shadow-color: rgba(0, 0, 0, 0.1);
-  --brand-gradient-from: #808C65;
-  --brand-gradient-via: #B4BF60;
-  --brand-gradient-to: #808C65;
+  --shadow-lg: rgba(0, 0, 0, 0.08);
+  --brand-gradient-from: #00BFFF;
+  --brand-gradient-via: #FFA500;
+  --brand-gradient-to: #40E0D0;
+  --accent-color: #FFA500;
+  --accent-hover: #ff8c00;
+  --overlay-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(0, 191, 255, 0.4);
 }
 
 body {
@@ -81,7 +99,7 @@ body {
   }
 
   .glow-effect {
-    box-shadow: 0 0 20px rgba(180, 191, 96, 0.3), 0 0 40px rgba(180, 191, 96, 0.2);
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.4), 0 0 40px rgba(255, 165, 0, 0.3);
   }
 
   .hover-lift {
@@ -97,7 +115,7 @@ body {
       0 10px 25px rgba(0, 0, 0, 0.5),
       0 5px 15px rgba(0, 0, 0, 0.3),
       0 2px 8px rgba(0, 0, 0, 0.2),
-      0 0 0 1px rgba(180, 191, 96, 0.1) inset;
+      0 0 0 1px rgba(0, 191, 255, 0.2) inset;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
   }
 
@@ -105,9 +123,9 @@ body {
     box-shadow: 
       0 15px 35px rgba(0, 0, 0, 0.6),
       0 10px 25px rgba(0, 0, 0, 0.4),
-      0 5px 15px rgba(180, 191, 96, 0.25),
-      0 0 10px rgba(180, 191, 96, 0.15),
-      0 0 0 1px rgba(180, 191, 96, 0.2) inset;
+      0 5px 15px rgba(255, 165, 0, 0.3),
+      0 0 10px rgba(0, 191, 255, 0.2),
+      0 0 0 1px rgba(64, 224, 208, 0.3) inset;
   }
 }
 
@@ -128,9 +146,9 @@ body {
 /* Efecto de partículas de fondo (opcional - puedes activarlo si quieres) */
 .bg-pattern {
   background-image: 
-    radial-gradient(at 20% 50%, rgba(180, 191, 96, 0.05) 0px, transparent 50%),
-    radial-gradient(at 80% 80%, rgba(128, 140, 101, 0.05) 0px, transparent 50%),
-    radial-gradient(at 40% 20%, rgba(180, 191, 96, 0.03) 0px, transparent 50%);
+    radial-gradient(at 20% 50%, rgba(0, 191, 255, 0.08) 0px, transparent 50%),
+    radial-gradient(at 80% 80%, rgba(255, 165, 0, 0.06) 0px, transparent 50%),
+    radial-gradient(at 40% 20%, rgba(64, 224, 208, 0.05) 0px, transparent 50%);
 }
 
 

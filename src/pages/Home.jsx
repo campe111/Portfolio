@@ -4,7 +4,6 @@ import { motion } from 'framer-motion'
 import SkillsCarousel from '../components/SkillsCarousel'
 import AnimatedSection from '../components/AnimatedSection'
 import skillsData from '../data/skills.json'
-import { useTheme } from '../context/ThemeContext'
 
 const motivationalQuotes = [
   "El código es poesía escrita en lógica.",
@@ -15,7 +14,6 @@ const motivationalQuotes = [
 ]
 
 const Home = () => {
-  const { theme } = useTheme()
   const [quote, setQuote] = useState('')
   const [displayedText, setDisplayedText] = useState('')
   const [showCursor, setShowCursor] = useState(true)
@@ -88,31 +86,18 @@ const Home = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className={`relative overflow-hidden py-20 transition-all duration-300 ${
-            theme === 'light'
-              ? 'bg-gradient-to-br from-[#E5F2D0] via-[#FFFFFF] to-[#E5F2D0]'
-              : 'bg-gradient-to-br from-custom-1 via-custom-2 to-custom-1'
-          }`}
-          style={{ zIndex: 1 }}
+          className="relative overflow-hidden py-20 transition-all duration-300"
+          style={{ 
+            zIndex: 1,
+            backgroundImage: 'url(/fondo-hero.jpeg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
         >
-          {/* Patrón de fondo sutil */}
-          <div className={`absolute inset-0 opacity-60 ${
-            theme === 'light'
-              ? 'bg-gradient-to-br from-[#808C65]/5 via-[#B4BF60]/5 to-[#808C65]/5'
-              : 'bg-pattern'
-          }`}></div>
-          {/* Gradientes decorativos */}
-          <div className={`absolute top-0 left-0 w-1/2 h-1/2 rounded-full blur-3xl ${
-            theme === 'light'
-              ? 'bg-gradient-to-br from-[#B4BF60]/20 to-transparent'
-              : 'bg-gradient-to-br from-custom-4/10 to-transparent'
-          }`}></div>
-          <div className={`absolute bottom-0 right-0 w-1/2 h-1/2 rounded-full blur-3xl ${
-            theme === 'light'
-              ? 'bg-gradient-to-tl from-[#808C65]/25 to-transparent'
-              : 'bg-gradient-to-tl from-custom-3/15 to-transparent'
-          }`}></div>
-          <div className="relative z-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          {/* Overlay oscuro sobre la imagen */}
+          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.h1
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -132,19 +117,15 @@ const Home = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="mb-8 text-xl font-['Inter'] font-semibold text-[var(--text-tertiary)] md:text-2xl"
+              className="mb-8 text-xl font-['Inter'] font-semibold text-white md:text-2xl"
             >
-              Desarrollador y Emprendedor
+              Desarrollador Web Frontend
             </motion.p>
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className={`relative mx-auto mb-8 max-w-2xl rounded-xl border p-8 shadow-2xl backdrop-blur-md transition-all duration-300 overflow-hidden ${
-                theme === 'light'
-                  ? 'border-[#B4BF60]/60 bg-gradient-to-br from-[#E5F2D0] via-[#B4BF60]/30 to-[#808C65] hover:border-[#B4BF60]/80'
-                  : 'border-[var(--border-color)] bg-gradient-to-br from-[var(--bg-secondary)]/60 to-[var(--bg-tertiary)]/60 hover:border-custom-4/40'
-              }`}
+              className="relative mx-auto mb-8 max-w-2xl rounded-xl border p-8 shadow-2xl backdrop-blur-md transition-all duration-300 overflow-hidden border-[var(--border-color)] bg-gradient-to-br from-[var(--bg-secondary)]/60 to-[var(--bg-tertiary)]/60 hover:border-custom-4/40"
             >
               {/* Contenedor de frases con máscara */}
               <div className="relative">
@@ -203,10 +184,11 @@ const Home = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
               <Link
                 to="/projects"
-                className="group inline-block transform rounded-xl bg-custom-4 px-10 py-4 font-['Inter'] text-lg font-semibold text-custom-1 shadow-xl shadow-custom-4/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-custom-4/60 hover:bg-custom-4/90"
+                className="group inline-block transform rounded-xl bg-custom-4 px-10 py-4 font-['Inter'] text-lg font-semibold text-white shadow-xl shadow-custom-4/50 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-custom-4/60 hover:bg-custom-4/90"
               >
                 <span className="flex items-center gap-2">
                   Ver Mis Proyectos
@@ -218,34 +200,29 @@ const Home = () => {
                   </motion.span>
                 </span>
               </Link>
+              <button
+                onClick={(e) => {
+                  e.preventDefault()
+                  window.open('/CvOcampos-DEV (1).pdf', '_blank')
+                }}
+                className="group inline-block transform rounded-xl border border-custom-4 bg-custom-2 px-10 py-4 font-['Inter'] text-lg font-semibold text-custom-4 shadow-xl shadow-custom-4/30 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-custom-4/50 hover:bg-custom-2/90 hover:text-custom-4"
+              >
+                CV
+              </button>
             </motion.div>
           </div>
         </motion.section>
 
-        <AnimatedSection className={`relative py-16 transition-all duration-300 ${
-          theme === 'light' ? 'bg-[#C4D89A]' : 'bg-custom-1'
-        }`}>
-          {/* Patrón de fondo sutil */}
-          <div className={`absolute inset-0 opacity-60 ${
-            theme === 'light' 
-              ? 'bg-gradient-to-br from-[#B4BF60]/10 via-[#808C65]/5 to-[#B4BF60]/10'
-              : 'bg-pattern'
-          }`}></div>
+        <AnimatedSection className="relative py-16 transition-all duration-300 bg-black">
+          {/* Overlay de fondo */}
+          <div className="absolute inset-0 bg-black"></div>
           {/* Gradientes decorativos */}
           <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-gradient-to-br from-custom-4/10 to-transparent rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-gradient-to-tl from-custom-3/15 to-transparent rounded-full blur-3xl"></div>
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="rounded-3xl border border-white/20 bg-gradient-to-br from-custom-2 to-custom-3 px-10 pt-6 pb-8 shadow-2xl shadow-black/40 backdrop-blur-xl hover:border-custom-4/30 transition-all duration-300" style={{ overflow: 'visible' }}>
-              <h2 className="mb-6 text-center text-3xl md:text-4xl font-bold font-['Space_Grotesk'] transition-all duration-300">
-                <span 
-                  className={`transition-all duration-300 ${
-                    theme === 'light' 
-                      ? 'text-white' 
-                      : 'bg-gradient-to-r bg-clip-text text-transparent from-custom-5 via-custom-4 to-custom-5'
-                  }`}
-                >
-                  Tecnologías que Domino
-                </span>
+              <h2 className="mb-6 text-center text-3xl md:text-4xl font-bold font-['Space_Grotesk'] transition-all duration-300 text-white">
+                Tecnologías que Domino
               </h2>
               <div style={{ paddingTop: '10px', paddingBottom: '10px', overflow: 'visible' }}>
                 <SkillsCarousel skills={skillsData} />
@@ -256,40 +233,28 @@ const Home = () => {
 
         <AnimatedSection
           delay={0.2}
-          className={`relative overflow-hidden py-16 text-[var(--text-primary)] transition-all duration-300 ${
-            theme === 'light'
-              ? 'bg-gradient-to-br from-[#E5F2D0] via-[#FFFFFF] to-[#E5F2D0]'
-              : 'bg-gradient-to-br from-custom-1 via-custom-2 to-custom-1'
-          }`}
+          className="relative overflow-hidden py-16 text-[var(--text-primary)] transition-all duration-300"
+          style={{ 
+            backgroundImage: 'url(/fondo-hero.jpeg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
         >
-          {/* Patrón de fondo sutil */}
-          <div className={`absolute inset-0 opacity-60 ${
-            theme === 'light'
-              ? 'bg-gradient-to-br from-[#808C65]/5 via-[#B4BF60]/5 to-[#808C65]/5'
-              : 'bg-pattern'
-          }`}></div>
-          {/* Gradientes decorativos */}
-          <div className={`absolute top-0 right-0 w-1/2 h-1/2 rounded-full blur-3xl ${
-            theme === 'light'
-              ? 'bg-gradient-to-bl from-[#B4BF60]/20 to-transparent'
-              : 'bg-gradient-to-bl from-custom-4/10 to-transparent'
-          }`}></div>
-          <div className={`absolute bottom-0 left-0 w-1/2 h-1/2 rounded-full blur-3xl ${
-            theme === 'light'
-              ? 'bg-gradient-to-tr from-[#808C65]/25 to-transparent'
-              : 'bg-gradient-to-tr from-custom-3/15 to-transparent'
-          }`}></div>
+          {/* Overlay oscuro sobre la imagen */}
+          <div className="absolute inset-0 bg-black/50"></div>
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="mb-4 text-3xl font-bold font-['Space_Grotesk'] text-[var(--text-primary)]">
-              ¿Querés conocer más sobre mí?
-            </h2>
-            <p className="mb-8 text-lg font-['Inter'] font-medium text-[var(--text-tertiary)]">
-              Explorá mi historia, proyectos y conectemos.
-            </p>
+            <div className="rounded-3xl border border-white/20 bg-gradient-to-br from-custom-2 to-custom-3 px-10 pt-6 pb-8 shadow-2xl shadow-black/40 backdrop-blur-xl hover:border-custom-4/30 transition-all duration-300">
+              <h2 className="mb-4 text-3xl font-bold font-['Space_Grotesk'] text-white">
+                ¿Querés conocer más sobre mí?
+              </h2>
+              <p className="mb-8 text-lg font-['Inter'] font-medium text-white/80">
+                Explorá mi historia, proyectos y conectemos.
+              </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/about"
-                className="rounded-lg border border-custom-4 bg-custom-4 px-8 py-3 font-['Inter'] font-semibold text-custom-1 shadow-lg shadow-custom-4/50 transition-colors duration-300 hover:bg-custom-4/90"
+                className="rounded-lg border border-custom-4 bg-custom-4 px-8 py-3 font-['Inter'] font-semibold text-white shadow-lg shadow-custom-4/50 transition-colors duration-300 hover:bg-custom-4/90"
               >
                 Mi Historia
               </Link>
@@ -299,6 +264,7 @@ const Home = () => {
               >
                 Contactame
               </Link>
+              </div>
             </div>
           </div>
         </AnimatedSection>

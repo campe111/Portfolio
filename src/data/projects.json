@@ -47,5 +47,15 @@
     "images": ["/images/gia.png", "/images/gia2.png", "/images/gia3.png", "/images/gia4.png", "/images/gia5.png", "/images/gia6.png"],
     "github": "https://github.com/campe111/Gia-Electro",
     "demo": "https://gia-electro.vercel.app"
+  },
+  {
+    "id": 6,
+    "title": "Simulador de Variables",
+    "description": "Aplicación interactiva para simular y experimentar con diferentes variables, permitiendo observar cambios y efectos en tiempo real con una interfaz intuitiva.",
+    "technologies": ["React", "JavaScript", "Tailwind CSS"],
+    "image": "/images/Simulatore.png",
+    "images": ["/images/Simulatore.png", "/images/Simulatore2.png", "/images/Simulatore3.png", "/images/Simulatore4.png"],
+    "github": "https://github.com/campe111/Simulador-Variables",
+    "demo": "https://simulador-variables.vercel.app"
   }
 ]
