@@ -5,37 +5,54 @@ const ProjectCard = ({ project, index = 0 }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [modalImageIndex, setModalImageIndex] = useState(0)
-  const [imagesLoaded, setImagesLoaded] = useState(new Set([0]))
+  const [allImagesLoaded, setAllImagesLoaded] = useState(false)
 
   // Obtener todas las imágenes disponibles
   const images = project.images && project.images.length > 0 
     ? project.images 
     : [project.image || '/placeholder-project.jpg']
 
-  // Pre-cargar la siguiente imagen antes de que se necesite
+  // Pre-cargar todas las imágenes al montar el componente
   useEffect(() => {
-    if (images.length <= 1) return
+    if (images.length <= 1) {
+      setAllImagesLoaded(true)
+      return
+    }
 
-    const preloadImage = (src) => {
+    let loadedCount = 0
+    const totalImages = images.length
+    const imagePromises = []
+
+    images.forEach((src, idx) => {
       const img = new Image()
-      img.src = src
-    }
+      const promise = new Promise((resolve, reject) => {
+        img.onload = () => {
+          loadedCount++
+          resolve()
+        }
+        img.onerror = () => {
+          loadedCount++
+          resolve() // Continuar aunque falle
+        }
+        img.src = src
+      })
+      imagePromises.push(promise)
+    })
 
-    // Pre-cargar la siguiente imagen cuando cambia currentImageIndex
-    const nextIndex = (currentImageIndex + 1) % images.length
-    if (!imagesLoaded.has(nextIndex)) {
-      preloadImage(images[nextIndex])
-      setImagesLoaded(prev => new Set([...prev, nextIndex]))
-    }
-  }, [currentImageIndex, images, imagesLoaded])
+    // Esperar a que todas las imágenes estén cargadas
+    Promise.all(imagePromises).then(() => {
+      setAllImagesLoaded(true)
+    })
+  }, [images])
 
   // Carrusel automático en la card con delay único por card
+  // Solo inicia después de que todas las imágenes estén cargadas
   useEffect(() => {
-    if (images.length <= 1) return
+    if (images.length <= 1 || !allImagesLoaded) return
 
     // Delay inicial diferente para cada card basado en su índice
-    // Cada card tendrá un offset de 800ms adicionales (ajustado para mejor efecto)
-    const initialDelay = index * 800 // 0ms, 800ms, 1600ms, 2400ms, etc.
+    // Cada card tendrá un offset de 1000ms adicionales
+    const initialDelay = index * 1000 // 0ms, 1000ms, 2000ms, 3000ms, etc.
 
     let interval
     
@@ -43,14 +60,14 @@ const ProjectCard = ({ project, index = 0 }) => {
       // Después del delay inicial, comenzar el intervalo
       interval = setInterval(() => {
         setCurrentImageIndex((prev) => (prev + 1) % images.length)
-      }, 3500) // Cambia cada 3.5 segundos (ajustado para dar tiempo a la animación)
+      }, 5000) // Cambia cada 5 segundos (aumentado para transiciones más lentas)
     }, initialDelay)
 
     return () => {
       clearTimeout(timeoutId)
       if (interval) clearInterval(interval)
     }
-  }, [images.length, index])
+  }, [images.length, index, allImagesLoaded])
 
   // Navegación con teclado en el modal
   useEffect(() => {
@@ -124,16 +141,6 @@ const ProjectCard = ({ project, index = 0 }) => {
             />
           </AnimatePresence>
           
-          {/* Pre-cargar la siguiente imagen ocultamente */}
-          {images.length > 1 && (
-            <img
-              src={images[(currentImageIndex + 1) % images.length]}
-              alt=""
-              className="hidden"
-              loading="eager"
-              aria-hidden="true"
-            />
-          )}
           
           {/* Indicadores de múltiples imágenes */}
           {images.length > 1 && (
