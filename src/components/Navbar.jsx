@@ -30,7 +30,6 @@ const Navbar = () => {
     { path: '/contact', label: 'Contacto' },
   ]
 
-
   return (
     <nav
       className={`sticky top-0 z-50 border-b transition-all duration-300 ${

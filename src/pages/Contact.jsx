@@ -1,10 +1,8 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import AnimatedSection from '../components/AnimatedSection'
-import { useTheme } from '../context/ThemeContext'
 
 const Contact = () => {
-  const { theme } = useTheme()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
