@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import emailjs from '@emailjs/browser'
 import AnimatedSection from '../components/AnimatedSection'
+import { validateEmail } from '../utils/emailValidation'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +12,19 @@ const Contact = () => {
   })
 
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState('')
+  const [emailError, setEmailError] = useState('')
+  const [backgroundAttachment, setBackgroundAttachment] = useState('scroll')
+
+  useEffect(() => {
+    const updateAttachment = () => {
+      setBackgroundAttachment(window.innerWidth >= 768 ? 'fixed' : 'scroll')
+    }
+    updateAttachment()
+    window.addEventListener('resize', updateAttachment)
+    return () => window.removeEventListener('resize', updateAttachment)
+  }, [])
 
   const socialLinks = [
     {
@@ -60,20 +75,123 @@ const Contact = () => {
   ]
 
   const handleChange = (e) => {
+    const { name, value } = e.target
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     })
+    
+    // Validar email en tiempo real
+    if (name === 'email' && value) {
+      if (!validateEmail(value)) {
+        setEmailError('Por favor, ingresa un email válido')
+      } else {
+        setEmailError('')
+      }
+    } else if (name === 'email' && !value) {
+      setEmailError('')
+    }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('Formulario enviado:', formData)
-    setSubmitted(true)
-    setTimeout(() => {
-      setSubmitted(false)
+    setError('')
+    
+    // Validaciones
+    if (!formData.name.trim()) {
+      setError('Por favor, ingresa tu nombre')
+      return
+    }
+    
+    if (!formData.email.trim()) {
+      setError('Por favor, ingresa tu email')
+      return
+    }
+    
+    if (!validateEmail(formData.email)) {
+      setError('Por favor, ingresa un email válido')
+      return
+    }
+    
+    if (!formData.message.trim()) {
+      setError('Por favor, ingresa un mensaje')
+      return
+    }
+
+    setIsSubmitting(true)
+
+    try {
+      // Usar EmailJS si está configurado, sino usar fallback
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
+      if (serviceId && templateId && publicKey) {
+        // Template params - coinciden con tu template en EmailJS ({{name}}, {{message}}, {{time}})
+        const templateParams = {
+          name: formData.name.trim(),
+          message: formData.message.trim(),
+          time: new Date().toLocaleString('es-AR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+          }),
+        }
+
+        console.log('Enviando email con:', { serviceId, templateId, templateParams })
+
+        const response = await emailjs.send(
+          serviceId,
+          templateId,
+          templateParams,
+          publicKey
+        )
+
+        console.log('Email enviado exitosamente:', response)
+      } else {
+        console.warn('EmailJS no configurado completamente, usando fallback mailto')
+        // Fallback: usar mailto si EmailJS no está configurado
+        const subject = encodeURIComponent(`Contacto desde Portfolio - ${formData.name}`)
+        const body = encodeURIComponent(`Nombre: ${formData.name}\nEmail: ${formData.email}\n\nMensaje:\n${formData.message}`)
+        window.location.href = `mailto:brianmatias999@gmail.com?subject=${subject}&body=${body}`
+      }
+
+      setSubmitted(true)
       setFormData({ name: '', email: '', message: '' })
-    }, 3000)
+      setEmailError('')
+      
+      setTimeout(() => {
+        setSubmitted(false)
+      }, 5000)
+    } catch (err) {
+      console.error('Error detallado al enviar el formulario:', err)
+      console.error('Error status:', err.status)
+      console.error('Error text:', err.text)
+      
+      // Mensaje de error más específico
+      let errorMessage = 'Hubo un error al enviar el mensaje. '
+      if (err.status === 400) {
+        // Verificar si es error de Public Key
+        if (err.text && err.text.includes('Public Key')) {
+          errorMessage += 'La Public Key de EmailJS no es válida. Por favor, verifica la configuración.'
+        } else {
+          errorMessage += 'Verifica que el template en EmailJS tenga las variables: {{name}}, {{message}}, {{time}}'
+        }
+      } else if (err.status === 401) {
+        errorMessage += 'La clave pública de EmailJS es incorrecta. Verifica tu Public Key en https://dashboard.emailjs.com/admin/account'
+      } else if (err.status === 404) {
+        errorMessage += 'El Service ID o Template ID no se encontró. Verifica que sean correctos.'
+      } else {
+        errorMessage += 'Por favor, intenta nuevamente o contactame directamente.'
+      }
+      
+      setError(errorMessage)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -84,7 +202,7 @@ const Contact = () => {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed'
+        backgroundAttachment: backgroundAttachment
       }}
     >
       {/* Overlay oscuro sobre la imagen */}
@@ -141,9 +259,20 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-lg border border-white/10 bg-black/40 px-4 py-2 text-white placeholder-gray-400 shadow-sm transition-all duration-300 hover:border-custom-4/50 hover:bg-black/60 focus:border-custom-4 focus:ring-2 focus:ring-custom-4/30 focus:bg-black/60"
+                    className={`w-full rounded-lg border px-4 py-2 text-white placeholder-gray-400 shadow-sm transition-all duration-300 bg-black/40 hover:bg-black/60 focus:ring-2 focus:ring-custom-4/30 focus:bg-black/60 ${
+                      emailError 
+                        ? 'border-red-500 focus:border-red-500' 
+                        : 'border-white/10 hover:border-custom-4/50 focus:border-custom-4'
+                    }`}
                     placeholder="tu@email.com"
+                    aria-invalid={emailError ? 'true' : 'false'}
+                    aria-describedby={emailError ? 'email-error' : undefined}
                   />
+                  {emailError && (
+                    <p id="email-error" className="mt-1 text-sm text-red-400" role="alert">
+                      {emailError}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label
@@ -163,16 +292,32 @@ const Contact = () => {
                     placeholder="Tu mensaje..."
                   />
                 </div>
+                {error && (
+                  <div className="border border-red-500/40 bg-red-500/20 p-3 text-center text-red-400 rounded-lg" role="alert">
+                    {error}
+                  </div>
+                )}
+                
                 <button
                   type="submit"
-                  className="w-full rounded-lg border border-custom-4 bg-custom-4 py-3 font-semibold text-white shadow-lg shadow-custom-4/60 transition-all duration-300 hover:bg-custom-4/90 hover:scale-105 hover:shadow-xl hover:shadow-custom-4/80 active:scale-95"
+                  disabled={isSubmitting}
+                  className={`w-full rounded-lg border border-custom-4 bg-custom-4 py-3 font-semibold text-white shadow-lg shadow-custom-4/60 transition-all duration-300 hover:bg-custom-4/90 hover:scale-105 hover:shadow-xl hover:shadow-custom-4/80 active:scale-95 ${
+                    isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
+                  aria-busy={isSubmitting}
                 >
-                  Enviar Mensaje
+                  {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
                 </button>
+                
                 {submitted && (
-                  <div className="border border-custom-5/40 bg-custom-5/20 p-3 text-center text-custom-5 rounded-lg">
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="border border-green-500/40 bg-green-500/20 p-3 text-center text-green-400 rounded-lg"
+                    role="alert"
+                  >
                     ¡Mensaje enviado! Te contactaré pronto.
-                  </div>
+                  </motion.div>
                 )}
               </form>
             </div>

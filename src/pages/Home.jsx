@@ -20,7 +20,17 @@ const Home = () => {
   const [isChangingQuote, setIsChangingQuote] = useState(false)
   const [flashPosition, setFlashPosition] = useState(-30)
   const [nextQuote, setNextQuote] = useState('')
+  const [backgroundAttachment, setBackgroundAttachment] = useState('scroll')
   const fullText = "Hola, soy Brian"
+
+  useEffect(() => {
+    const updateAttachment = () => {
+      setBackgroundAttachment(window.innerWidth >= 768 ? 'fixed' : 'scroll')
+    }
+    updateAttachment()
+    window.addEventListener('resize', updateAttachment)
+    return () => window.removeEventListener('resize', updateAttachment)
+  }, [])
 
   useEffect(() => {
     const randomQuote = motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)]
@@ -239,7 +249,7 @@ const Home = () => {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
-            backgroundAttachment: 'fixed'
+            backgroundAttachment: backgroundAttachment
           }}
         >
           {/* Overlay oscuro sobre la imagen */}

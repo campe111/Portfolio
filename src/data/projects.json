@@ -35,7 +35,7 @@
     "description": "Sistema de gestión de relaciones con clientes completo con gestión de contactos, seguimiento de ventas, tareas y reportes. Interfaz intuitiva para optimizar la gestión comercial.",
     "technologies": ["React", "Node.js", "MongoDB", "Tailwind CSS"],
     "image": "/images/CRM.png",
-    "images": ["/images/CRM.png", "/images/CRM1.png", "/images/CRM2.png", "/images/CRM3.png", "/images/CRM4.png", "/images/CRM5.png", "/images/CRM6.png", "/images/CRM7.png", "/images/CRM8.png", "/images/CRM9.png", "/images/CRM10.png", "/images/CRM11.png", "/images/CRM12.png"],
+    "images": ["/images/CRM-1.png", "/images/CRM-2.png", "/images/CRM-3.png", "/images/CRM-4.png", "/images/CRM-5.png", "/images/CRM-6.png", "/images/CRM-7.png", "/images/CRM-8.png", "/images/CRM-9.png", "/images/CRM-10.png"],
     "github": "https://github.com/campe111/CRM-"
   },
   {
@@ -57,5 +57,15 @@
     "images": ["/images/Simulatore.png", "/images/Simulatore2.png", "/images/Simulatore3.png", "/images/Simulatore4.png"],
     "github": "https://github.com/campe111/Simulador-Variables",
     "demo": "https://simulador-variables.vercel.app"
+  },
+  {
+    "id": 7,
+    "title": "Pac-Man React",
+    "description": "Recreación del clásico juego Pac-Man desarrollado con React. Incluye mecánicas de juego completas, sistema de puntuación, niveles y controles intuitivos para una experiencia de juego nostálgica y divertida.",
+    "technologies": ["React", "JavaScript", "CSS"],
+    "image": "/images/pacman.png",
+    "images": ["/images/pacman.png"],
+    "github": "https://github.com/campe111/Pacman-react",
+    "demo": "https://pacman-react-lyart.vercel.app"
   }
 ]

@@ -46,6 +46,7 @@ const Navbar = () => {
           <Link
             to="/"
             className="text-2xl font-bold font-['Space_Grotesk'] text-[var(--text-primary)] transition-all duration-300 hover:text-custom-4 hover:scale-105"
+            aria-label="Ir al inicio - Brian Matias Ocampos"
           >
             Brian Matias Ocampos
           </Link>

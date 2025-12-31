@@ -1,0 +1,10 @@
+# robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://portfolio-brian-eta.vercel.app/sitemap.xml
+
+# Disallow admin areas if you add them in the future
+# Disallow: /admin/
+

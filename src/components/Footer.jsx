@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
 
@@ -44,36 +45,36 @@ const Footer = () => {
             </h3>
             <ul className="flex flex-wrap justify-center gap-x-4 gap-y-1">
               <li>
-                <a href="/" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
+                <Link to="/" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
                   Inicio
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/about" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
+                <Link to="/about" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
                   Sobre Mí
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/projects" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
+                <Link to="/projects" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
                   Proyectos
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/contact" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
+                <Link to="/contact" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
                   Contacto
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
 
           {/* Redes Sociales y Proyecto centrados */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+          <div className="flex flex-col items-center justify-center gap-4">
             {/* Redes Sociales */}
-            <div className="p-0 text-center sm:text-left">
+            <div className="p-0 text-center">
               <h3 className="text-xs font-semibold font-['Space_Grotesk'] text-white mb-1.5">
                 Sígueme en redes
               </h3>
-              <div className="flex flex-wrap justify-center sm:justify-start gap-1.5">
+              <div className="flex flex-wrap justify-center gap-1.5">
                 {socialLinks.map((link, index) => (
                   <motion.a
                     key={link.name}
@@ -96,11 +97,11 @@ const Footer = () => {
             </div>
 
             {/* Sección de Proyecto */}
-            <div className="text-center sm:text-left">
+            <div className="text-center">
               <h3 className="text-xs font-semibold font-['Space_Grotesk'] text-white mb-1.5">
                 ¿Tenés un proyecto?
               </h3>
-              <div className="flex flex-wrap justify-center sm:justify-start gap-x-3 gap-y-1 text-white/70">
+              <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 text-white/70">
                 <a
                   href="mailto:brianmatias999@gmail.com"
                   className="flex items-center gap-1 hover:text-custom-4 transition-colors duration-300"
@@ -155,24 +156,24 @@ const Footer = () => {
             </h3>
             <ul className="space-y-1">
               <li>
-                <a href="/" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
+                <Link to="/" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
                   Inicio
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/about" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
+                <Link to="/about" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
                   Sobre Mí
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/projects" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
+                <Link to="/projects" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
                   Proyectos
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/contact" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
+                <Link to="/contact" className="text-white/70 hover:text-custom-4 font-['Inter'] text-xs transition-colors duration-300">
                   Contacto
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

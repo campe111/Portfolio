@@ -7,7 +7,17 @@ const About = () => {
   const [displayedQuote, setDisplayedQuote] = useState('')
   const [showCursor, setShowCursor] = useState(false)
   const [hasStarted, setHasStarted] = useState(false)
+  const [backgroundAttachment, setBackgroundAttachment] = useState('scroll')
   const quoteRef = useRef(null)
+
+  useEffect(() => {
+    const updateAttachment = () => {
+      setBackgroundAttachment(window.innerWidth >= 768 ? 'fixed' : 'scroll')
+    }
+    updateAttachment()
+    window.addEventListener('resize', updateAttachment)
+    return () => window.removeEventListener('resize', updateAttachment)
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -54,7 +64,7 @@ const About = () => {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed'
+        backgroundAttachment: backgroundAttachment
       }}
     >
       {/* Overlay oscuro sobre la imagen */}
