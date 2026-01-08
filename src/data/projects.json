@@ -32,7 +32,7 @@
   {
     "id": 4,
     "title": "CRM",
-    "description": "Sistema de gestión de relaciones con clientes completo con gestión de contactos, seguimiento de ventas, tareas y reportes. Interfaz intuitiva para optimizar la gestión comercial.",
+    "description": "Un simulador de variables para comparar diferentes escenarios entre costos fijos, costos variables y ganancias.",
     "technologies": ["React", "Node.js", "MongoDB", "Tailwind CSS"],
     "image": "/images/CRM.png",
     "images": ["/images/CRM-1.png", "/images/CRM-2.png", "/images/CRM-3.png", "/images/CRM-4.png", "/images/CRM-5.png", "/images/CRM-6.png", "/images/CRM-7.png", "/images/CRM-8.png", "/images/CRM-9.png", "/images/CRM-10.png"],
@@ -73,8 +73,8 @@
     "title": "Buscaminas React",
     "description": "Juego de Buscaminas completo desarrollado con React y TypeScript. Incluye tablero 10x10 con 15 minas, sistema de banderas, revelación automática de celdas vacías, detección de victoria y derrota, con una interfaz moderna y responsiva.",
     "technologies": ["React", "TypeScript", "Tailwind CSS", "Vite"],
-    "image": "/images/buscaminas.png",
-    "images": ["/images/buscaminas.png"],
+    "image": "/images/buscaminasreact.png",
+    "images": ["/images/buscaminasreact.png"],
     "github": "https://github.com/campe111/Buscaminas-React",
     "demo": "https://buscaminas-react-six.vercel.app"
   }

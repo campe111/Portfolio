@@ -230,97 +230,165 @@ const ProjectCard = ({ project, index = 0 }) => {
         </div>
       </motion.div>
 
-      {/* Modal de imagen ampliada */}
+      {/* Modal de imagen ampliada con descripción completa */}
       <AnimatePresence>
         {isModalOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm overflow-y-auto"
             onClick={closeModal}
           >
             {/* Botón cerrar */}
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 text-white hover:text-custom-4 transition-colors z-10"
+              className="fixed top-4 right-4 text-white hover:text-custom-4 transition-colors z-20 bg-black/50 rounded-full p-2 backdrop-blur-sm"
+              aria-label="Cerrar modal"
             >
               <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
 
-            {/* Contenedor de imagen */}
-            <div className="relative max-w-7xl max-h-[90vh] mx-4" onClick={(e) => e.stopPropagation()}>
-              <AnimatePresence mode="wait">
-                <motion.img
-                  key={modalImageIndex}
-                  src={images[modalImageIndex]}
-                  alt={`${project.title} - Imagen ${modalImageIndex + 1}`}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3 }}
-                  className="max-w-full max-h-[90vh] object-contain rounded-lg"
-                />
-              </AnimatePresence>
+            {/* Contenedor principal */}
+            <div className="relative max-w-5xl w-full mx-4 my-8" onClick={(e) => e.stopPropagation()}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.3 }}
+                className="bg-gradient-to-br from-[var(--bg-secondary)]/95 to-[var(--bg-tertiary)]/95 rounded-xl overflow-hidden backdrop-blur-lg border border-[var(--border-color)] shadow-2xl"
+              >
+                {/* Contenedor de imagen */}
+                <div className="relative bg-black/50">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={modalImageIndex}
+                      src={images[modalImageIndex]}
+                      alt={`${project.title} - Imagen ${modalImageIndex + 1}`}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-full max-h-[60vh] object-contain"
+                    />
+                  </AnimatePresence>
 
-              {/* Flecha izquierda */}
-              {images.length > 1 && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    handlePrevious()
-                  }}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-110"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-              )}
-
-              {/* Flecha derecha */}
-              {images.length > 1 && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    handleNext()
-                  }}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-110"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              )}
-
-              {/* Contador de imágenes */}
-              {images.length > 1 && (
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full backdrop-blur-sm text-sm">
-                  {modalImageIndex + 1} / {images.length}
-                </div>
-              )}
-
-              {/* Indicadores en la parte inferior */}
-              {images.length > 1 && (
-                <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 flex gap-2">
-                  {images.map((_, idx) => (
+                  {/* Flecha izquierda */}
+                  {images.length > 1 && (
                     <button
-                      key={idx}
                       onClick={(e) => {
                         e.stopPropagation()
-                        setModalImageIndex(idx)
+                        handlePrevious()
                       }}
-                      className={`h-2 rounded-full transition-all duration-300 ${
-                        idx === modalImageIndex
-                          ? 'w-8 bg-custom-4'
-                          : 'w-2 bg-white/50 hover:bg-white/70'
-                      }`}
-                    />
-                  ))}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-110"
+                      aria-label="Imagen anterior"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                  )}
+
+                  {/* Flecha derecha */}
+                  {images.length > 1 && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleNext()
+                      }}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-300 hover:scale-110"
+                      aria-label="Imagen siguiente"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  )}
+
+                  {/* Contador de imágenes */}
+                  {images.length > 1 && (
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full backdrop-blur-sm text-sm">
+                      {modalImageIndex + 1} / {images.length}
+                    </div>
+                  )}
+
+                  {/* Indicadores en la parte inferior */}
+                  {images.length > 1 && (
+                    <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex gap-2">
+                      {images.map((_, idx) => (
+                        <button
+                          key={idx}
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setModalImageIndex(idx)
+                          }}
+                          className={`h-2 rounded-full transition-all duration-300 ${
+                            idx === modalImageIndex
+                              ? 'w-8 bg-custom-4'
+                              : 'w-2 bg-white/50 hover:bg-white/70'
+                          }`}
+                          aria-label={`Ir a imagen ${idx + 1}`}
+                        />
+                      ))}
+                    </div>
+                  )}
                 </div>
-              )}
+
+                {/* Contenedor de información del proyecto */}
+                <div className="p-6 md:p-8">
+                  {/* Título */}
+                  <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">
+                    {project.title}
+                  </h3>
+
+                  {/* Descripción completa */}
+                  <p className="mb-6 text-base md:text-lg text-white/90 leading-relaxed whitespace-pre-wrap">
+                    {project.description}
+                  </p>
+
+                  {/* Tecnologías */}
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.technologies.map((tech, techIndex) => (
+                      <span
+                        key={techIndex}
+                        className="px-3 py-1 text-sm font-medium rounded-full backdrop-blur-sm bg-gradient-to-r from-custom-2/20 to-custom-4/20 text-white border border-custom-2/40"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Enlaces */}
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    {project.github && (
+                      <motion.a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex-1 bg-[var(--bg-tertiary)] text-[var(--text-primary)] text-center py-3 rounded-lg border border-custom-4/30 font-medium transition-all duration-300 hover:bg-custom-4 hover:border-custom-4 hover:text-custom-1 hover:shadow-lg hover:shadow-custom-4/30"
+                      >
+                        GitHub
+                      </motion.a>
+                    )}
+                    {project.demo && (
+                      <motion.a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex-1 bg-custom-4 text-white text-center py-3 rounded-lg font-medium shadow-lg shadow-custom-4/40 transition-all duration-300 hover:shadow-xl hover:shadow-custom-4/50 hover:bg-custom-4/90"
+                      >
+                        Demo
+                      </motion.a>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
         )}
